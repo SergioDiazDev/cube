@@ -43,6 +43,7 @@ typedef struct s_player
 	uint32_t	color;
 	mlx_t		*mlx;
 	mlx_image_t	*walls;
+	mlx_image_t	*bg;
 }	t_player;
 
 typedef struct s_map

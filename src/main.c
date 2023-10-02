@@ -45,6 +45,20 @@ int main()
 	p.planeY = 0.66;
 
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
+	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
+	int i = -1;
+	while (++i < WIDTH)
+	{
+		int j = -1;
+		while (++j < HEIGHT)
+		{
+			if (j < HEIGHT / 2)
+				mlx_put_pixel(p.bg, i, j, 0x009933FF);
+			else
+				mlx_put_pixel(p.bg, i, j, 0xF5F5DCFF);
+		}
+	}
+	mlx_image_to_window(p.mlx, p.bg, 0, 0);
 	p.walls = mlx_new_image(p.mlx, screenWidth, screenHeight);
 	ft_paint(&p);
 	mlx_image_to_window(p.mlx, p.walls, 0, 0);
