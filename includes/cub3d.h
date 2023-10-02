@@ -10,6 +10,10 @@
 
 # define WIDTH	1024
 # define HEIGHT	1024
+#define mapWidth 24
+#define mapHeight 24
+#define screenWidth 1024
+#define screenHeight 1024
 
 typedef struct s_player
 {
@@ -59,12 +63,13 @@ typedef struct s_map
 	t_player	*player;
 }	t_map;
 
-
+void	ft_verLine(int x, t_player *p);
+void	ft_paint(t_player *p);
 //init_cub3d
 
 ////////////////////////////////////////////////////////
 //hooks
-
+void	ft_hook(void *param);
 ////////////////////////////////////////////////////////
 //ray.c
 
