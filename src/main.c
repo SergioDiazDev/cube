@@ -42,8 +42,8 @@ int main()
 		}
 	//Se deben inicializar en el parseo
 	//Pos del jugador
-	p.posX = 1;
-	p.posY = 1;
+	p.posX = 5;
+	p.posY = 5;
 	//Direciones respecto hacia donde se mira
 	p.dirX = -1;
 	p.dirY = 0;

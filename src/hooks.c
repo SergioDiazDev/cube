@@ -13,20 +13,36 @@ void	ft_hook(void *param)
 		if ((p->posY + p->dirY * 0.2 > 0) && (p->posX - p->dirX * 0.2 > 0)
 			&& p->posY + p->dirY * 0.2 < mapHeight && p->posX - p->dirX * 0.2 < mapWidth)
 		{
-			p->posY -= p->dirY * 0.2;
-			p->posX -= p->dirX * 0.2;
+			if (p->map[(int)(p->posX - 0.5)][(int)(p->posY - 0.5)] == '0')
+			{
+				p->posY -= p->dirY * 0.2;
+				p->posX -= p->dirX * 0.2;
+			}
+			else
+			{
+				p->posY += p->dirY * 0.2;
+				p->posX += p->dirX * 0.2;
+			}
 		}
 	}
-	else if (mlx_is_key_down(p->mlx, MLX_KEY_W) && p->map[(int)(p->posX + 0.5)][(int)(p->posY + 0.5)] == '0')
+	if (mlx_is_key_down(p->mlx, MLX_KEY_W) && p->map[(int)(p->posX + 0.5)][(int)(p->posY + 0.5)] == '0')
 	{
-		printf("X:%f\tY:%f\t= %c\n", p->posX, p->posY, p->map[(int)p->posX][(int)p->posY]);
 		if ((p->posY - p->dirY * 0.2 > 0) && (p->posX + p->dirX * 0.2 > 0)
 			&& p->posY + p->dirY  * 0.2 < mapHeight && p->posX - p->dirX  * 0.2 < mapWidth)
 		{
-			p->posY += p->dirY * 0.2;
-			p->posX += p->dirX * 0.2;
+			if (p->map[(int)(p->posX + 0.5)][(int)(p->posY + 0.5)] == '0')
+			{
+				p->posY += p->dirY * 0.2;
+				p->posX += p->dirX * 0.2;
+			}
+			else
+			{
+				p->posY -= p->dirY * 0.2;
+				p->posX -= p->dirX * 0.2;
+			}
 		}
 	}
+	printf("X:%f\tY:%f\t= %c\n", p->posX, p->posY, p->map[(int)p->posX][(int)p->posY]);
 	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT) || mlx_is_key_down(p->mlx, MLX_KEY_A))
 	{
 		double oldDirX = p->dirX;
