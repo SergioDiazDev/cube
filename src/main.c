@@ -34,13 +34,13 @@ int main()
 {
 	t_player p;
 
-	//inicializo el mapa Error Al inicializar el mapa
+	//Se deben inicializar en el parseo
+	//inicializar mapa
 	for (int i = 0; i < mapWidth; i++)
 		for (int j = 0; j < mapHeight; j++)
 		{
 			p.map[i][j] = worldMap[i][j];
 		}
-	//Se deben inicializar en el parseo
 	//Pos del jugador
 	p.posX = 5;
 	p.posY = 5;
@@ -50,8 +50,11 @@ int main()
 	p.planeX = 0;
 	p.planeY = 0.66;
 
+	//Para la funcion init
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
 	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
+
+	//Paint BackGround
 	int i = -1;
 	while (++i < WIDTH)
 	{
@@ -59,22 +62,27 @@ int main()
 		while (++j < HEIGHT)
 		{
 			if (j < HEIGHT / 2)
-				mlx_put_pixel(p.bg, i, j, 0x009933FF);
+				mlx_put_pixel(p.bg, i, j, 0x00CCCCFF);
 			else
-				mlx_put_pixel(p.bg, i, j, 0xF5F5DCFF);
+				mlx_put_pixel(p.bg, i, j, 0xC0C0C0FF);
 		}
 	}
 	mlx_image_to_window(p.mlx, p.bg, 0, 0);
+	//
+	//Creo el lienzo para los muros (ft_init)
 	p.walls = mlx_new_image(p.mlx, screenWidth, screenHeight);
+	//Pinto los primeros muros
 	ft_paint(&p);
 	mlx_image_to_window(p.mlx, p.walls, 0, 0);
-	
+	//loops
 	mlx_loop_hook(p.mlx, ft_hook, &p);
 	mlx_loop(p.mlx);
+	//Falta frees
 }
 
 void	ft_paint(t_player *p)
 {
+	//Elimino los muros antiguos
 	if (p->walls)
 	{
 		mlx_delete_image(p->mlx, p->walls);
@@ -90,88 +98,22 @@ void	ft_paint(t_player *p)
 		p->mapX = (int)p->posX;
 		p->mapY = (int)p->posY;
 
-		if (!p->rayDirX)
-			p->deltaDistX = 1e30;
-		else
-			p->deltaDistX = fabs(1 / p->rayDirX);
-		if (!p->rayDirY)
-			p->deltaDistY = 1e30;
-		else
-			p->deltaDistY = fabs(1 /p->rayDirY);
-		
-		p->hit = 0;
-
-		if (p->rayDirX < 0)
-		{
-			p->stepX = -1;
-			p->sideDistX = (p->posX - p->mapX) * p->deltaDistX;
-		}
-		else
-		{
-			p->stepX = 1;
-			p->sideDistX = (p->mapX + 1.0 - p->posX) * p->deltaDistX;
-		}
-		if (p->rayDirY < 0)
-		{
-			p->stepY = -1;
-			p->sideDistY = (p->posY - p->mapY) * p->deltaDistY;
-		}
-		else
-		{
-			p->stepY = 1;
-			p->sideDistY = (p->mapY + 1.0 - p->posY) * p->deltaDistY;
-		}
-		//PERFORM DDA
-		while(p->hit == 0)
-		{
-			if (p->sideDistX < p->sideDistY)
-			{
-				p->sideDistX += p->deltaDistX;
-				p->mapX += p->stepX;
-				p->side = 0;
-			}
-			else
-			{
-				p->sideDistY += p->deltaDistY;
-				p->mapY += p->stepY;
-				p->side = 1;
-			}
-			if (p->map[p->mapX][p->mapY] == '1')
-				p->hit = 1;
-		}
+		//sacar a funcion
+		ft_deltas(p);
 		//
-
+		p->hit = 0;
+		//sacar a funcion
+		ft_steps(p);
+		//
+		//PERFORM DDA
+		ft_performDda(p);
 		//Calculate distance Walls
-		if (!p->side)
-			p->perpWallDist = p->sideDistX - p->deltaDistX;
-		else
-			p->perpWallDist = p->sideDistY - p->deltaDistY;
-		//Calulate height Walls
-		p->lineHeight = (int)(screenWidth / p->perpWallDist);
-		p->drawStart = -p->lineHeight / 2 + screenHeight / 2;
-		if (p->drawStart < 0)
-			p->drawStart = 0;
-		p->drawEnd = p->lineHeight / 2 + screenHeight / 2;
-		if (p->drawEnd >= screenHeight)
-			p->drawEnd = screenHeight - 1;
-		
-		//COlor
+		ft_distanceWalls(p);
+		//Color aqui hay que usar texturas 
 		p->color = p->side ? 0xFBAED2FF : 0xfc030bff;
 		//printf("X:%f Y:%f = %c\n",p->posX, p->posY, p->map[p->mapX][p->mapY]);
-		ft_verLine(x, p);
+		ft_paintWalls(x, p);
 		x++;
 	}
 	mlx_image_to_window(p->mlx, p->walls, 0, 0);
-}
-
-void	ft_verLine(int x, t_player *p)
-{
-	int y;
-	y = p->drawStart;
-	while (y < p->drawEnd)
-	{
-		mlx_put_pixel(p->walls, x, y ,p->color);
-		y++;
-	}
-
 }

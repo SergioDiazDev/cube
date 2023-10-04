@@ -65,23 +65,22 @@ typedef struct s_map
 	t_player	*player;
 }	t_map;
 
-void	ft_verLine(int x, t_player *p);
-void	ft_paint(t_player *p);
+
 //init_cub3d
 
 ////////////////////////////////////////////////////////
 //hooks
 void	ft_hook(void *param);
-////////////////////////////////////////////////////////
-//ray.c
+
 
 ////////////////////////////////////////////////////////
 //RayCaster
-
+void	ft_performDda(t_player *p);
+void	ft_distanceWalls(t_player *p);
+void	ft_deltas(t_player *p);
+void	ft_steps(t_player *p);
 ////////////////////////////////////////////////////////
-//Minimap
-
-////////////////////////////////////////////////////////
-//pintar el minimapa y de ocultar las parte no observables
-
+//Paint
+void	ft_paintWalls(int x, t_player *p);
+void	ft_paint(t_player *p);
 #endif

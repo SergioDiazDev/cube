@@ -10,7 +10,7 @@ endif
 RM				=	rm -fr
 DIR_MAKE_MLX	=	./MLX42
 DIR_SRC			=	./src/
-SRC				= 	$(DIR_SRC)main.c $(DIR_SRC)hooks.c
+SRC				= 	$(DIR_SRC)main.c $(DIR_SRC)hooks.c $(DIR_SRC)rayCaster.c $(DIR_SRC)paint.c
 # COLORS
 GREEN = `tput setaf 2`
 RED = `tput setaf 1`
