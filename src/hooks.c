@@ -17,8 +17,9 @@ void	ft_hook(void *param)
 			p->posX -= p->dirX * 0.2;
 		}
 	}
-	else if (mlx_is_key_down(p->mlx, MLX_KEY_W))
+	else if (mlx_is_key_down(p->mlx, MLX_KEY_W) && p->map[(int)(p->posX + 0.5)][(int)(p->posY + 0.5)] == '0')
 	{
+		printf("X:%f\tY:%f\t= %c\n", p->posX, p->posY, p->map[(int)p->posX][(int)p->posY]);
 		if ((p->posY - p->dirY * 0.2 > 0) && (p->posX + p->dirX * 0.2 > 0)
 			&& p->posY + p->dirY  * 0.2 < mapHeight && p->posX - p->dirX  * 0.2 < mapWidth)
 		{

@@ -17,6 +17,7 @@
 
 typedef struct s_player
 {
+	char		map[100][100];
 	double		posX;
 	double		posY;
 	double		dirX;
