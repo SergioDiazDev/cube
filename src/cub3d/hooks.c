@@ -22,8 +22,22 @@ void	ft_hook(void *param)
 		if (p->map[(int)(p->posX - p->dirX * 0.2)][(int)(p->posY)] != '1')
 			p->posX -= p->dirX * 0.2;
 	}
+	if (mlx_is_key_down(p->mlx, MLX_KEY_A))
+	{
+		if (p->map[(int)(p->posX)][(int)(p->posY - p->planeY * 0.2)] != '1')
+			p->posY -= p->planeY * 0.2;
+		if (p->map[(int)(p->posX - p->planeX * 0.2)][(int)(p->posY)] != '1')
+			p->posX -= p->planeX * 0.2;
+	}
+	if (mlx_is_key_down(p->mlx, MLX_KEY_D))
+	{
+		if (p->map[(int)(p->posX)][(int)(p->posY + p->planeY * 0.2)] != '1')
+			p->posY += p->planeY * 0.2;
+		if (p->map[(int)(p->posX + p->planeX * 0.2)][(int)(p->posY)] != '1')
+			p->posX += p->planeX * 0.2;
+	}
 	//printf("X:%f\tY:%f\t= %c\n", p->posX, p->posY, p->map[(int)p->posX][(int)p->posY]);
-	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(p->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT))
 	{
 		double oldDirX = p->dirX;
 		p->dirX = p->dirX * cos(0.1) - p->dirY * sin(0.1);
@@ -32,7 +46,7 @@ void	ft_hook(void *param)
 		p->planeX = p->planeX * cos(0.1) - p->planeY * sin(0.1);
 		p->planeY = oldPlaneX * sin(0.1) + p->planeY * cos(0.1);
 	}
-	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT) || mlx_is_key_down(p->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT))
 	{
 		double oldDir = p->dirX;
 		p->dirX = p->dirX * cos(-0.1) - p->dirY * sin(-0.1);
