@@ -45,7 +45,6 @@ int main()
 	p.dirY = -1;
 	p.planeX = 0.66;
 	p.planeY = 0;
-
 	//Para la funcion init
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
 	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
