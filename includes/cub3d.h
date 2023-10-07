@@ -2,9 +2,11 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h> 
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <string.h>
 # include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
@@ -21,7 +23,7 @@ typedef struct s_map
 	int			height;
 	int			start_map;
 	char		**map_fill;
-	char		**file_fill;
+	char		**file;
 	char		*no;
 	char		*so;
 	char		*we;
@@ -62,6 +64,7 @@ typedef struct s_player
 	mlx_t		*mlx;
 	mlx_image_t	*walls;
 	mlx_image_t	*bg;
+	t_map	mapa;
 }	t_player;
 
 //init_cub3d
@@ -69,8 +72,6 @@ typedef struct s_player
 ////////////////////////////////////////////////////////
 //hooks
 void	ft_hook(void *param);
-
-
 ////////////////////////////////////////////////////////
 //RayCaster
 void	ft_perform_dda(t_player *p);
@@ -81,4 +82,14 @@ void	ft_steps(t_player *p);
 //Paint
 void	ft_paint_wall(int x, t_player *p);
 void	ft_paint(t_player *p);
+////////////////////////////////////////////////////////
+//MAP PARSE
+t_map	ft_get_map(char *str);
+////////////////////////////////////////////////////////
+//GNL
+char	*get_next_line(int fd);
+////////////////////////////////////////////////////////
+//FILE UTILS
+char	**ft_get_file(char *str);
+
 #endif
