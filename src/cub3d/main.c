@@ -41,10 +41,10 @@ int main()
 	p.posX = 5;
 	p.posY = 5;
 	//Direciones respecto hacia donde se mira
-	p.dirX = -1;
-	p.dirY = 1;
-	p.planeX = 0;
-	p.planeY = 0.66;
+	p.dirX = 0;
+	p.dirY = -1;
+	p.planeX = 0.66;
+	p.planeY = 0;
 	//Para la funcion init
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
 	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
