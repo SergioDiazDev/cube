@@ -1,5 +1,5 @@
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_hook(void *param)
 {
@@ -25,7 +25,7 @@ void	ft_hook(void *param)
 			}
 		}
 	}
-	if (mlx_is_key_down(p->mlx, MLX_KEY_W) && p->map[(int)(p->posX + 0.5)][(int)(p->posY + 0.5)] == '0')
+	if (mlx_is_key_down(p->mlx, MLX_KEY_W))
 	{
 		if ((p->posY - p->dirY * 0.2 > 0) && (p->posX + p->dirX * 0.2 > 0)
 			&& p->posY + p->dirY  * 0.2 < mapHeight && p->posX - p->dirX  * 0.2 < mapWidth)

@@ -1,6 +1,6 @@
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
-void	ft_performDda(t_player *p)
+void	ft_perform_dda(t_player *p)
 {
 	while(p->hit == 0)
 		{
@@ -21,7 +21,7 @@ void	ft_performDda(t_player *p)
 		}
 }
 
-void	ft_distanceWalls(t_player *p)
+void	ft_distance_wall(t_player *p)
 {
 	if (!p->side)
 			p->perpWallDist = p->sideDistX - p->deltaDistX;

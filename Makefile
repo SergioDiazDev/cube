@@ -62,7 +62,6 @@ $(OBJSFD)$(CUB3DFD): $(OBJSFD)
 		@echo "\t[ $(GREEN)✔$(NONE) ] $@ directory"
 
 $(OBJSFD)$(GNLFD): $(OBJSFD)
-		echo $@
 		@mkdir $@
 		@echo "\t[ $(GREEN)✔$(NONE) ] $@ directory"
 

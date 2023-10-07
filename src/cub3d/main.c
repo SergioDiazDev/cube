@@ -1,4 +1,4 @@
-#include "includes/cub3d.h"
+#include "cub3d.h"
 
 char worldMap[mapWidth][mapHeight] = {
   {"111111111111111111111111"},
@@ -41,10 +41,10 @@ int main()
 	p.posX = 5;
 	p.posY = 5;
 	//Direciones respecto hacia donde se mira
-	p.dirX = 0;
-	p.dirY = -1;
-	p.planeX = 0.66;
-	p.planeY = 0;
+	p.dirX = -1;
+	p.dirY = 1;
+	p.planeX = 0;
+	p.planeY = 0.66;
 	//Para la funcion init
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
 	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
@@ -101,13 +101,13 @@ void	ft_paint(t_player *p)
 		ft_steps(p);
 		//
 		//PERFORM DDA
-		ft_performDda(p);
+		ft_perform_dda(p);
 		//Calculate distance Walls
-		ft_distanceWalls(p);
+		ft_distance_wall(p);
 		//Color aqui hay que usar texturas 
 		p->color = p->side ? 0xFBAED2FF : 0xfc030bff;
 		//printf("X:%f Y:%f = %c\n",p->posX, p->posY, p->map[p->mapX][p->mapY]);
-		ft_paintWalls(x, p);
+		ft_paint_wall(x, p);
 		x++;
 	}
 	mlx_image_to_window(p->mlx, p->walls, 0, 0);

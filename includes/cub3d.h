@@ -73,12 +73,12 @@ void	ft_hook(void *param);
 
 ////////////////////////////////////////////////////////
 //RayCaster
-void	ft_performDda(t_player *p);
-void	ft_distanceWalls(t_player *p);
+void	ft_perform_dda(t_player *p);
+void	ft_distance_wall(t_player *p);
 void	ft_deltas(t_player *p);
 void	ft_steps(t_player *p);
 ////////////////////////////////////////////////////////
 //Paint
-void	ft_paintWalls(int x, t_player *p);
+void	ft_paint_wall(int x, t_player *p);
 void	ft_paint(t_player *p);
 #endif
