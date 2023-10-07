@@ -40,7 +40,7 @@ int main()
 	//Pos del jugador
 	p.posX = 5;
 	p.posY = 5;
-	//Direciones respecto hacia donde se mira
+	//Direciones respecto hacia donde se mira problemas aqui.
 	p.dirX = 0;
 	p.dirY = -1;
 	p.planeX = 0.66;

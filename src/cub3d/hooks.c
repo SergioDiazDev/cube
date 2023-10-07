@@ -8,35 +8,38 @@ void	ft_hook(void *param)
 	p = (t_player *) param;
 	if (mlx_is_key_down(p->mlx, MLX_KEY_ESCAPE))
 		exit(-33);
+	//Separar
 	if (mlx_is_key_down(p->mlx, MLX_KEY_W))
 	{
-		if (p->map[(int)(p->posX)][(int)(p->posY + p->dirY * 0.2)] != '1')
-			p->posY += p->dirY * 0.2;
-		if (p->map[(int)(p->posX + p->dirX * 0.2)][(int)(p->posY)] != '1')
-			p->posX += p->dirX * 0.2;
+		if (p->map[(int)(p->posX)][(int)(p->posY + p->dirY * 0.1)] != '1')
+			p->posY += p->dirY * 0.1;
+		if (p->map[(int)(p->posX + p->dirX * 0.1)][(int)(p->posY)] != '1')
+			p->posX += p->dirX * 0.1;
 	}
 	if (mlx_is_key_down(p->mlx, MLX_KEY_S))
 	{
-		if (p->map[(int)(p->posX)][(int)(p->posY - p->dirY * 0.2)] != '1')
-			p->posY -= p->dirY * 0.2;
-		if (p->map[(int)(p->posX - p->dirX * 0.2)][(int)(p->posY)] != '1')
-			p->posX -= p->dirX * 0.2;
+		if (p->map[(int)(p->posX)][(int)(p->posY - p->dirY * 0.1)] != '1')
+			p->posY -= p->dirY * 0.1;
+		if (p->map[(int)(p->posX - p->dirX * 0.1)][(int)(p->posY)] != '1')
+			p->posX -= p->dirX * 0.1;
 	}
+	//Separar
 	if (mlx_is_key_down(p->mlx, MLX_KEY_A))
 	{
-		if (p->map[(int)(p->posX)][(int)(p->posY - p->planeY * 0.2)] != '1')
-			p->posY -= p->planeY * 0.2;
-		if (p->map[(int)(p->posX - p->planeX * 0.2)][(int)(p->posY)] != '1')
-			p->posX -= p->planeX * 0.2;
+		if (p->map[(int)(p->posX)][(int)(p->posY - p->planeY * 0.1)] != '1')
+			p->posY -= p->planeY * 0.1;
+		if (p->map[(int)(p->posX - p->planeX * 0.1)][(int)(p->posY)] != '1')
+			p->posX -= p->planeX * 0.1;
 	}
 	if (mlx_is_key_down(p->mlx, MLX_KEY_D))
 	{
-		if (p->map[(int)(p->posX)][(int)(p->posY + p->planeY * 0.2)] != '1')
-			p->posY += p->planeY * 0.2;
-		if (p->map[(int)(p->posX + p->planeX * 0.2)][(int)(p->posY)] != '1')
-			p->posX += p->planeX * 0.2;
+		if (p->map[(int)(p->posX)][(int)(p->posY + p->planeY * 0.1)] != '1')
+			p->posY += p->planeY * 0.1;
+		if (p->map[(int)(p->posX + p->planeX * 0.1)][(int)(p->posY)] != '1')
+			p->posX += p->planeX * 0.1;
 	}
 	//printf("X:%f\tY:%f\t= %c\n", p->posX, p->posY, p->map[(int)p->posX][(int)p->posY]);
+	//Separar
 	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT))
 	{
 		double oldDirX = p->dirX;
