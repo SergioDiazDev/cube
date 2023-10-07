@@ -40,78 +40,28 @@ int main(int ac, char **av)
 	}
 	else
 		p.mapa = ft_get_map(av[1]);
-	// //Pos del jugador
-	// p.posX = 5;
-	// p.posY = 5;
-	// //Direciones respecto hacia donde se mira
-	// p.dirX = -1;
-	// p.dirY = 1;
-	// p.planeX = 0;
-	// p.planeY = 0.66;
-	// //Para la funcion init
-	// p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
-	// p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
+	//Pos del jugador
+	p.posX = 5;
+	p.posY = 5;
+	//Direciones respecto hacia donde se mira problemas aqui.
+	p.dirX = 0;
+	p.dirY = -1;
+	p.planeX = 0.66;
+	p.planeY = 0;
+	//Para la funcion init
+	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
+	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
 
-	// //Paint BackGround
-	// int i = -1;
-	// while (++i < WIDTH)
-	// {
-	// 	int j = -1;
-	// 	while (++j < HEIGHT)
-	// 	{
-	// 		if (j < HEIGHT / 2)
-	// 			mlx_put_pixel(p.bg, i, j, 0x00CCCCFF);
-	// 		else
-	// 			mlx_put_pixel(p.bg, i, j, 0xC0C0C0FF);
-	// 	}
-	// }
-	// mlx_image_to_window(p.mlx, p.bg, 0, 0);
-	// //
-	// //Creo el lienzo para los muros (ft_init)
-	// p.walls = mlx_new_image(p.mlx, screenWidth, screenHeight);
-	// //Pinto los primeros muros
-	// ft_paint(&p);
-	// mlx_image_to_window(p.mlx, p.walls, 0, 0);
-	// //loops
-	// mlx_loop_hook(p.mlx, ft_hook, &p);
-	// mlx_loop(p.mlx);
+	//Paint BackGround
+	ft_paint_bg(&p);
+	mlx_image_to_window(p.mlx, p.bg, 0, 0);
+	//Creo el lienzo para los muros (ft_init)
+	p.walls = mlx_new_image(p.mlx, screenWidth, screenHeight);
+	//Pinto los primeros muros
+	ft_paint(&p);
+	mlx_image_to_window(p.mlx, p.walls, 0, 0);
+	//loops
+	mlx_loop_hook(p.mlx, ft_hook, &p);
+	mlx_loop(p.mlx);
 	//Falta frees
-}
-
-void	ft_paint(t_player *p)
-{
-	//Elimino los muros antiguos
-	if (p->walls)
-	{
-		mlx_delete_image(p->mlx, p->walls);
-		p->walls = mlx_new_image(p->mlx, screenWidth, screenHeight);
-	}
-	//Realizamos los calculos
-	int x = 0;
-	while (x < screenWidth)
-	{
-		p->cameraX = 2 * x / (double)screenWidth -1;
-		p->rayDirX = p->dirX + p->planeX * p->cameraX;
-		p->rayDirY = p->dirY + p->planeY * p->cameraX;
-		p->mapX = (int)p->posX;
-		p->mapY = (int)p->posY;
-
-		//sacar a funcion
-		ft_deltas(p);
-		//
-		p->hit = 0;
-		//sacar a funcion
-		ft_steps(p);
-		//
-		//PERFORM DDA
-		ft_perform_dda(p);
-		//Calculate distance Walls
-		ft_distance_wall(p);
-		//Color aqui hay que usar texturas 
-		p->color = p->side ? 0xFBAED2FF : 0xfc030bff;
-		//printf("X:%f Y:%f = %c\n",p->posX, p->posY, p->map[p->mapX][p->mapY]);
-		ft_paint_wall(x, p);
-		x++;
-	}
-	mlx_image_to_window(p->mlx, p->walls, 0, 0);
 }
