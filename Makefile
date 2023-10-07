@@ -1,4 +1,7 @@
+#PROJECT NAME
 NAME			=	cub3d
+
+#FLAGS AND MLX INCLUDE
 ifeq ($(shell uname), Darwin)
 	CFLAGS			=	-Wall -Werror -Wextra -g3
 	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
@@ -7,38 +10,86 @@ else
 	CFLAGS			=	-Wall -Werror -ldl -Wextra -g3
 	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"usr/lib/x86_64-linux-gnu/"
 endif
+
+#SHORT NAMES
 RM				=	rm -fr
-DIR_MAKE_MLX	=	./MLX42
-DIR_SRC			=	./src/
-SRC				= 	$(DIR_SRC)main.c $(DIR_SRC)hooks.c $(DIR_SRC)rayCaster.c $(DIR_SRC)paint.c
+
+# DIR SOURCES
+SRCSFD = src/
+
+# FOLDER'S NAMES
+CUB3DFD = cub3d/
+GNLFD = get_next_line/
+
+# SOURCES
+CUB3D_SRC = main.c hooks.c ray_caster.c paint.c
+GNLFD_SRC = get_next_line.c get_next_line_utils.c
+
+#OBJECTS
+OBJSFD = objs/
+CUB3D_OBJS = $(addprefix $(OBJSFD)$(CUB3DFD), $(CUB3D_SRC:.c=.o))
+GNL_OBJS = $(addprefix $(OBJSFD)$(GNLFD), $(GNLFD_SRC:.c=.o))
+
+#HEADERS
+HDRSFD = includes/
+HDR = cub3d.h
+HDRS = $(addprefix $(HDRSFD), $(HDR))
+
+HDR_INC = -I./includes
+
+#MLX PROGRAM
+MLX = ./MLX42/libmlx42.a
+
+#MLX DIR
+MLX_DIR = ./MLX42
+
 # COLORS
-GREEN = `tput setaf 2`
-RED = `tput setaf 1`
-RESET = `tput sgr0`
+RED = \033[0;31m
+GREEN = \033[0;32m
+NONE = \033[0m
 
 $(TRUE).SILENT:
 
 OBJ				=	$(SRC:.c=.o)
 
-all: make_mlx $(NAME)
+all: $(NAME)
 
-make_mlx:
-			@$(MAKE) -C $(DIR_MAKE_MLX)
+${MLX}:
+		@make -C $(MLX_DIR)
 
-$(NAME):	$(OBJ)
-			@gcc $(CFLAGS) $(SRC) -o $(NAME) $(DIR_MAKE_MLX)/libmlx42.a $(INCLUDE)
-			@echo "$(GREEN)CREATE $(NAME)$(RESET)"
+$(OBJSFD):
+		@mkdir $@
+		@echo "\t[ $(GREEN)✔$(NONE) ] $@ directory"
+
+$(OBJSFD)$(CUB3DFD): $(OBJSFD)
+		@mkdir $@
+		@echo "\t[ $(GREEN)✔$(NONE) ] $@ directory"
+
+$(OBJSFD)$(GNLFD): $(OBJSFD)
+		echo $@
+		@mkdir $@
+		@echo "\t[ $(GREEN)✔$(NONE) ] $@ directory"
+
+$(OBJSFD)$(CUB3DFD)%.o: $(SRCSFD)$(CUB3DFD)%.c $(HDRS)
+		@gcc $(CFLAGS) $(HDR_INC) -o $@ -c $<
+
+$(OBJSFD)$(GNLFD)%.o: $(SRCSFD)$(GNLFD)%.c
+		@gcc $(CFLAGS) -o $@ -c $<
+
+${NAME}: ${MLX} $(OBJSFD)$(CUB3DFD) $(OBJSFD)$(GNLFD) ${GNL_OBJS} $(CUB3D_OBJS) $(HDRS)
+		@gcc $(CFLAGS) $(CUB3D_OBJS) ${GNL_OBJS} $(MLX) -o $@ $(INCLUDE)
+		@echo "\t[ $(GREEN)✔$(NONE) ] $@ executable"
 
 re:		fclean all
 
 clean:
-		@$(MAKE) -s clean -C $(DIR_MAKE_MLX)
-		@$(RM) $(OBJ)
-		@echo "$(RED)REMOVE OBJECTS $(NAME)$(RESET)\n"
+		@$(RM) $(OBJSFD)
+		@echo "\t[ $(RED)✗$(NONE) ] $(OBJSFD) directory"
+		@${MAKE} -s -C $(MLX_DIR) clean
 
 fclean:		clean
-			@$(MAKE) -s fclean -C $(DIR_MAKE_MLX)
 			@$(RM) $(NAME) $(NAME).dSYM
-			@echo "$(RED)DELETE $(NAME)$(RESET)\n"
+			@echo "\t[ $(RED)✗$(NONE) ] $(NAME) executable"
+			@${MAKE} -s -C $(MLX_DIR) fclean
 
-.PHONY: 	all make_mlx re clean fclean
+.PHONY: 	all re clean fclean

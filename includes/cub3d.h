@@ -15,6 +15,23 @@
 #define screenWidth 1024
 #define screenHeight 1024
 
+typedef struct s_map
+{
+	int			width;
+	int			height;
+	int			start_map;
+	char		**map_fill;
+	char		**file_fill;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*c;
+	char		*f;
+	uint32_t	ceiling_color;
+	uint32_t	floor_color;
+}	t_map;
+
 typedef struct s_player
 {
 	char		map[100][100];
@@ -46,25 +63,6 @@ typedef struct s_player
 	mlx_image_t	*walls;
 	mlx_image_t	*bg;
 }	t_player;
-
-typedef struct s_map
-{
-	int			width;
-	int			height;
-	int			start_map;
-	char		**map_fill;
-	char		**file_fill;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	char		*c;
-	char		*f;
-	uint32_t	ceiling_color;
-	uint32_t	floor_color;
-	t_player	*player;
-}	t_map;
-
 
 //init_cub3d
 

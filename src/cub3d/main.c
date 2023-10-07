@@ -1,6 +1,4 @@
-#include "../includes/cub3d.h"
-
-
+#include "includes/cub3d.h"
 
 char worldMap[mapWidth][mapHeight] = {
   {"111111111111111111111111"},
@@ -23,12 +21,10 @@ char worldMap[mapWidth][mapHeight] = {
   {"100000000000000000000001"},
   {"100000000000000000000001"},
   {"100000000000000000100001"},
-  {"100000000000000000100001"},
+  {"100000000000000000111111"},
   {"100000000000000000100001"},
   {"111111111111111111111111"}
 };
-
-
 
 int main()
 {
@@ -45,10 +41,10 @@ int main()
 	p.posX = 5;
 	p.posY = 5;
 	//Direciones respecto hacia donde se mira
-	p.dirX = -1;
-	p.dirY = 0;
-	p.planeX = 0;
-	p.planeY = 0.66;
+	p.dirX = 0;
+	p.dirY = -1;
+	p.planeX = 0.66;
+	p.planeY = 0;
 
 	//Para la funcion init
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
