@@ -79,6 +79,7 @@ void	ft_deltas(t_player *p);
 void	ft_steps(t_player *p);
 ////////////////////////////////////////////////////////
 //Paint
+void	ft_paint_bg(t_player *p);
 void	ft_paint_wall(int x, t_player *p);
 void	ft_paint(t_player *p);
 #endif
