@@ -48,10 +48,6 @@ RED = \033[0;31m
 GREEN = \033[0;32m
 NONE = \033[0m
 
-$(TRUE).SILENT:
-
-OBJ				=	$(SRC:.c=.o)
-
 all: $(NAME)
 
 ${MLX}:
