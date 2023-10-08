@@ -53,6 +53,8 @@ void	ft_introduce_line(char **file, int max, int fd)
 	s = get_next_line(fd);
 	if (s[0] != '\n')
 		file[i++] = s;
+	else
+		free(s);
 	while (i < max && s)
 	{
 		s = get_next_line(fd);
