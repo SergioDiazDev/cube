@@ -21,13 +21,18 @@ int	ft_size_file(int fd)
 
 	cont = 0;
 	line = get_next_line(fd);
+	if (!line)
+		return (0);
 	if (line[0] != '\n')
 			cont++;
 	while (line)
 	{
-		if (line[0] != '\n')
-			cont++;
+		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			cont ++;
+		else if (line[0] != '\n')
+			cont++;
 	}
 	return (cont);
 }
@@ -60,13 +65,10 @@ void	ft_introduce_line(char **file, int max, int fd)
 		s = get_next_line(fd);
 		if (!s)
 			file[i++] = s;
+		else if (s[0] != '\n')
+			file[i++] = s;
 		else
-		{
-			if (s[0] != '\n')
-				file[i++] = s;
-			else
-				free(s);
-		}
+			free(s);
 	}
 }
 
@@ -75,10 +77,10 @@ char	**ft_read_file(char *str, int max)
 	char	**file;
 	int		fd;
 
+	fd = ft_open_fd(str);
 	file = (char **) malloc(sizeof(char *) * max);
 	if (!file)
-		return (NULL);
-	fd = ft_open_fd(str);
+		return (close(fd), NULL);
 	ft_introduce_line(file, max, fd);
 	close(fd);
 	return (file);
