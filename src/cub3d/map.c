@@ -18,7 +18,12 @@ void	ft_parse_map(t_map *map)
 			else if(map->file[i][k] == '0' || map->file[i][k] == '1')
 				map->map_fill[j][k] = map->file[i][k];
 			else if(map->file[i][k] == 'N' || map->file[i][k] == 'S' || map->file[i][k] == 'W' || map->file[i][k] == 'E')
+			{
+				map->dir = map->file[i][k];
+				map->pos_h = j;
+				map->pos_w = k;
 				map->map_fill[j][k] = '0';
+			}
 			else
 			{
 				printf("ERROR = %c\n", map->file[i][k]);
@@ -82,6 +87,40 @@ void	ft_create_map(t_map *map)
 	}
 }
 
+void	ft_control_map(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map_fill[i])
+	{
+		j = 0;
+		while (map->map_fill[i][j])
+		{
+			if (map->map_fill[i][j] == '0')
+			{
+				if (i == 0 || j == 0 || \
+				i == map->height - 1 || j == map->width - 1)
+				{
+					perror("EL MAPA DEBE ESTAR RODEADO Y DEBO LIBERAR TODO");
+					exit (1);
+				}
+				if (map->map_fill[i + 1][j] == 'X' || \
+				map->map_fill[i - 1][j] == 'X' || \
+				map->map_fill[i][j + 1] == 'X' || \
+				map->map_fill[i][j - 1] == 'X')
+				{
+					perror("EL MAPA DEBE ESTAR RODEADO Y DEBO LIBERAR TODO");
+					exit (1);
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 t_map	ft_get_map(char *str)
 {
 	t_map	map;
@@ -93,11 +132,15 @@ t_map	ft_get_map(char *str)
 	ft_get_length_map(&map);
 	ft_create_map(&map);
 	ft_parse_map(&map);
+	ft_control_map(&map);
 	i = 0;
 	while (map.map_fill[i])
 	{
 		printf("%s\n", map.map_fill[i]);
 		i++;
 	}
+	printf("POSITION WIDTH %d\n", map.pos_w);
+	printf("POSITION HEIGHT %d\n", map.pos_h);
+	printf("DIRECTION %d\n", map.dir);
 	return (map);
 }

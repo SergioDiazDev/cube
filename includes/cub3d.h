@@ -36,7 +36,9 @@ typedef struct s_map
 {
 	int			width;
 	int			height;
-	int			start_map;
+	int			pos_w;
+	int			pos_h;
+	char		dir;
 	char		**map_fill;
 	char		**file;
 	t_textures	textures;
