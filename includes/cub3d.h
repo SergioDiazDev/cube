@@ -8,7 +8,8 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../library/MLX42/include/MLX42/MLX42.h"
+# include "../library/libft/libft.h"
 
 # define WIDTH	1024
 # define HEIGHT	1024
@@ -17,6 +18,20 @@
 #define screenWidth 1024
 #define screenHeight 1024
 
+typedef struct textures
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+}t_textures;
+
+typedef struct colours
+{
+	uint32_t	ceiling;
+	uint32_t	floor;
+}t_colours;
+
 typedef struct s_map
 {
 	int			width;
@@ -24,14 +39,8 @@ typedef struct s_map
 	int			start_map;
 	char		**map_fill;
 	char		**file;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	char		*c;
-	char		*f;
-	uint32_t	ceiling_color;
-	uint32_t	floor_color;
+	t_textures	textures;
+	t_colours	colours;
 }	t_map;
 
 typedef struct s_player
@@ -89,8 +98,16 @@ t_map	ft_get_map(char *str);
 ////////////////////////////////////////////////////////
 //GNL
 char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
 ////////////////////////////////////////////////////////
 //FILE UTILS
 char	**ft_get_file(char *str);
+////////////////////////////////////////////////////////
+//TEXTURES
+void	ft_get_textures(t_map map);
+////////////////////////////////////////////////////////
+//COLOURS
+char	*ft_strim_final(char *s);
+void	ft_get_colours(t_map map);
 
 #endif

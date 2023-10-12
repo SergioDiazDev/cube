@@ -22,7 +22,9 @@ CUB3DFD = cub3d/
 GNLFD = get_next_line/
 
 # SOURCES
-CUB3D_SRC = main.c hooks.c ray_caster.c paint.c map.c file_utils.c
+CUB3D_SRC = main.c hooks.c ray_caster.c paint.c \
+			map.c file_utils.c \
+			textures.c colours.c
 GNLFD_SRC = get_next_line.c get_next_line_utils.c
 
 #OBJECTS
@@ -38,10 +40,11 @@ HDRS = $(addprefix $(HDRSFD), $(HDR))
 HDR_INC = -I./includes
 
 #MLX PROGRAM
-MLX = ./MLX42/libmlx42.a
+MLX = ./library/MLX42/libmlx42.a
+LIBFT = library/libft/libft.a
 
 #MLX DIR
-MLX_DIR = ./MLX42
+MLX_DIR = ./library/MLX42
 
 # COLORS
 RED = \033[0;31m
@@ -49,6 +52,9 @@ GREEN = \033[0;32m
 NONE = \033[0m
 
 all: $(NAME)
+
+${LIBFT}:
+		@make -C library/libft
 
 ${MLX}:
 		@make -C $(MLX_DIR)
@@ -71,8 +77,8 @@ $(OBJSFD)$(CUB3DFD)%.o: $(SRCSFD)$(CUB3DFD)%.c $(HDRS)
 $(OBJSFD)$(GNLFD)%.o: $(SRCSFD)$(GNLFD)%.c
 		@gcc $(CFLAGS) -o $@ -c $<
 
-${NAME}: ${MLX} $(OBJSFD)$(CUB3DFD) $(OBJSFD)$(GNLFD) ${GNL_OBJS} $(CUB3D_OBJS) $(HDRS)
-		@gcc $(CFLAGS) $(CUB3D_OBJS) ${GNL_OBJS} $(MLX) -o $@ $(INCLUDE)
+${NAME}: ${MLX} ${LIBFT} $(OBJSFD)$(CUB3DFD) $(OBJSFD)$(GNLFD) ${GNL_OBJS} $(CUB3D_OBJS) $(HDRS)
+		@gcc $(CFLAGS) $(CUB3D_OBJS) ${GNL_OBJS} $(MLX) ${LIBFT}  -o $@ $(INCLUDE)
 		@echo "\t[ $(GREEN)✔$(NONE) ] $@ executable"
 
 re:		fclean all
@@ -80,11 +86,13 @@ re:		fclean all
 clean:
 		@$(RM) $(OBJSFD)
 		@echo "\t[ $(RED)✗$(NONE) ] $(OBJSFD) directory"
+		@${MAKE} -s -C library/libft/ clean
 		@${MAKE} -s -C $(MLX_DIR) clean
 
 fclean:		clean
 			@$(RM) $(NAME) $(NAME).dSYM
 			@echo "\t[ $(RED)✗$(NONE) ] $(NAME) executable"
+			@${MAKE} -s -C library/libft/ fclean
 			@${MAKE} -s -C $(MLX_DIR) fclean
 
 .PHONY: 	all re clean fclean
