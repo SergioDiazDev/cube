@@ -54,7 +54,15 @@ void	ft_paint(t_player *p)
 		ft_perform_dda(p);
 		ft_distance_wall(p);
 		//Color aqui hay que usar texturas 
-		p->color = p->side ? 0x00000FF : 0xec8b00ff;
+		//p->color = p->side ? 0x00000FF : 0xec8b00ff;
+		if (p->side)
+		{
+			p->color = 0x00000FF;
+		}
+		else
+		{
+			p->color = 0xec8b00ff;
+		}
 		//printf("X:%f Y:%f = %c\n",p->posX, p->posY, p->map[p->mapX][p->mapY]);
 		ft_paint_wall(x, p);
 		x++;
