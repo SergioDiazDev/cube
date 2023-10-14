@@ -11,8 +11,6 @@
 # include "../library/MLX42/include/MLX42/MLX42.h"
 # include "../library/libft/libft.h"
 
-# define WIDTH	1024
-# define HEIGHT	1024
 #define screenWidth 1024
 #define screenHeight 1024
 
