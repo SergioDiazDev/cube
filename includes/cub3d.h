@@ -11,6 +11,8 @@
 # include "../library/MLX42/include/MLX42/MLX42.h"
 # include "../library/libft/libft.h"
 
+#define speedRotate 0.05
+#define speed 0.1
 #define screenWidth 1024
 #define screenHeight 1024
 
