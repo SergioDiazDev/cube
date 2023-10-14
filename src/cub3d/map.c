@@ -141,6 +141,6 @@ t_map	ft_get_map(char *str)
 	}
 	printf("POSITION WIDTH %d\n", map.pos_w);
 	printf("POSITION HEIGHT %d\n", map.pos_h);
-	printf("DIRECTION %d\n", map.dir);
+	printf("DIRECTION %c\n", map.dir);
 	return (map);
 }

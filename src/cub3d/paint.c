@@ -4,12 +4,12 @@ void	ft_paint_bg(t_player *p)
 {
 	int	i;
 	i = -1;
-	while (++i < WIDTH)
+	while (++i < p->mapa.width)
 	{
 		int j = -1;
-		while (++j < HEIGHT)
+		while (++j < p->mapa.height)
 		{
-			if (j < HEIGHT / 2)
+			if (j < p->mapa.height / 2)
 				mlx_put_pixel(p->bg, i, j, 0x00CCCCFF);
 			else
 				mlx_put_pixel(p->bg, i, j, 0xC0C0C0FF);

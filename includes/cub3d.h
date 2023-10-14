@@ -13,8 +13,6 @@
 
 # define WIDTH	1024
 # define HEIGHT	1024
-#define mapWidth 24
-#define mapHeight 24
 #define screenWidth 1024
 #define screenHeight 1024
 
@@ -47,7 +45,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	char		map[100][100];
+	char		**map;
 	double		posX;
 	double		posY;
 	double		dirX;
