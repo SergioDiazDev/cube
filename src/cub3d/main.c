@@ -8,8 +8,8 @@ int main(int ac, char **av)
 	p.mapa = ft_get_map(av[1]);
 	// // Pos del jugador
 	p.map = p.mapa.map_fill;
-	p.posX = p.mapa.pos_w;
-	p.posY = p.mapa.pos_h;
+	p.posX = p.mapa.pos_h + 0.5;
+	p.posY = p.mapa.pos_w + 0.5;
 	//Direciones respecto hacia donde se mira problemas aqui.
 	p.dirX = 0;
 	p.dirY = -1;

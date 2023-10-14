@@ -10,7 +10,7 @@ void	ft_paint_bg(t_player *p)
 		while (++j < p->mapa.height)
 		{
 			if (j < p->mapa.height / 2)
-				mlx_put_pixel(p->bg, i, j, 0x00CCCCFF);
+				mlx_put_pixel(p->bg, i, j, 0x00FFFFFF);
 			else
 				mlx_put_pixel(p->bg, i, j, 0xC0C0C0FF);
 		}
