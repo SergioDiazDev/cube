@@ -124,23 +124,13 @@ void	ft_control_map(t_map *map)
 t_map	ft_get_map(char *str)
 {
 	t_map	map;
-	int		i;
 
 	map.file = ft_get_file(str);
 	ft_get_textures(map);
-	ft_get_colours(map);
+	ft_get_colours(&map);
 	ft_get_length_map(&map);
 	ft_create_map(&map);
 	ft_parse_map(&map);
 	ft_control_map(&map);
-	i = 0;
-	while (map.map_fill[i])
-	{
-		printf("%s\n", map.map_fill[i]);
-		i++;
-	}
-	printf("POSITION WIDTH %d\n", map.pos_w);
-	printf("POSITION HEIGHT %d\n", map.pos_h);
-	printf("DIRECTION %c\n", map.dir);
 	return (map);
 }

@@ -16,10 +16,8 @@ int main(int ac, char **av)
 	p.planeX = 0.66;
 	p.planeY = 0;
 	//Para la funcion init
-	printf("%x\n", p.mapa.colours.ceiling);
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
 	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
-
 	//Paint BackGround
 	ft_paint_bg(&p);
 	mlx_image_to_window(p.mlx, p.bg, 0, 0);

@@ -77,8 +77,8 @@ uint32_t	ft_get_colours_by_id(char *id, char *str)
 	return (colour);
 }
 
-void	ft_get_colours(t_map map)
+void	ft_get_colours(t_map *map)
 {
-	map.colours.floor = ft_get_colours_by_id("F", map.file[4]);
-	map.colours.ceiling = ft_get_colours_by_id("C", map.file[5]);
+	map->colours.floor = ft_get_colours_by_id("F", map->file[4]);
+	map->colours.ceiling = ft_get_colours_by_id("C", map->file[5]);
 }

@@ -108,6 +108,6 @@ void	ft_get_textures(t_map map);
 ////////////////////////////////////////////////////////
 //COLOURS
 char	*ft_strim_final(char *s);
-void	ft_get_colours(t_map map);
+void	ft_get_colours(t_map *map);
 
 #endif

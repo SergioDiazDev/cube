@@ -3,6 +3,7 @@
 void	ft_paint_bg(t_player *p)
 {
 	int	i;
+
 	i = -1;
 	while (++i < screenWidth)
 	{
