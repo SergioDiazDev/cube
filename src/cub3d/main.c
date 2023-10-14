@@ -1,51 +1,22 @@
 #include "cub3d.h"
 
-char worldMap[mapWidth][mapHeight] = {
-  {"111111111111111111111111"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000000001"},
-  {"100000000000000000100001"},
-  {"100000000000000000111111"},
-  {"100000000000000000100001"},
-  {"111111111111111111111111"}
-};
-
-int main()
+int main(int ac, char **av)
 {
-	t_player p;
+	t_player	p;
 
-	//Se deben inicializar en el parseo
-	//inicializar mapa
-	for (int i = 0; i < mapWidth; i++)
-		for (int j = 0; j < mapHeight; j++)
-		{
-			p.map[i][j] = worldMap[i][j];
-		}
-	//Pos del jugador
-	p.posX = 5;
-	p.posY = 5;
+	ac = 0;
+	p.mapa = ft_get_map(av[1]);
+	// // Pos del jugador
+	p.map = p.mapa.map_fill;
+	p.posX = p.mapa.pos_h + 0.5;
+	p.posY = p.mapa.pos_w + 0.5;
 	//Direciones respecto hacia donde se mira problemas aqui.
 	p.dirX = 0;
 	p.dirY = -1;
 	p.planeX = 0.66;
 	p.planeY = 0;
 	//Para la funcion init
+	printf("%x\n", p.mapa.colours.ceiling);
 	p.mlx = mlx_init(screenWidth, screenHeight, "CUB3D", false);
 	p.bg = mlx_new_image(p.mlx, screenWidth, screenHeight);
 
@@ -60,5 +31,5 @@ int main()
 	//loops
 	mlx_loop_hook(p.mlx, ft_hook, &p);
 	mlx_loop(p.mlx);
-	//Falta frees
+	// // Falta frees
 }
