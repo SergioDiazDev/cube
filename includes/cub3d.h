@@ -8,8 +8,6 @@
 # include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define WIDTH	1024
-# define HEIGHT	1024
 #define mapWidth 24
 #define mapHeight 24
 #define screenWidth 1024
