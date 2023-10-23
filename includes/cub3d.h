@@ -73,7 +73,7 @@ typedef struct s_player
 	mlx_t		*mlx;
 	mlx_image_t	*walls;
 	mlx_image_t	*bg;
-	t_map	mapa;
+	t_map		mapa;
 }	t_player;
 
 //init_cub3d

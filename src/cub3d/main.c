@@ -6,7 +6,7 @@ int main(int ac, char **av)
 
 	ac = 0;
 	p.mapa = ft_get_map(av[1]);
-	// // Pos del jugador
+	// Pos del jugador
 	p.map = p.mapa.map_fill;
 	p.posX = p.mapa.pos_h + 0.5;
 	p.posY = p.mapa.pos_w + 0.5;
@@ -29,5 +29,5 @@ int main(int ac, char **av)
 	//loops
 	mlx_loop_hook(p.mlx, ft_hook, &p);
 	mlx_loop(p.mlx);
-	// // Falta frees
+	// Falta frees
 }

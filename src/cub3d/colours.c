@@ -69,10 +69,10 @@ uint32_t	ft_get_colours_by_id(char *id, char *str)
 		free(split);
 		exit (1);
 	}
-	colour = 0;
-	colour = ft_atoi(split[0]) << 16;
-	colour += ft_atoi(split[1]) << 8;
-	colour += ft_atoi(split[2]);
+	colour = 255;
+	colour += ft_atoi(split[0]) << 24;
+	colour += ft_atoi(split[1]) << 16;
+	colour += ft_atoi(split[2]) << 8;
 	ft_free_split(split);
 	return (colour);
 }
