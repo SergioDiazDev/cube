@@ -11,10 +11,12 @@
 # include "../library/MLX42/include/MLX42/MLX42.h"
 # include "../library/libft/libft.h"
 
-#define speedRotate 0.05
-#define speed 0.1
-#define screenWidth 1024
-#define screenHeight 1024
+# define RED			"\e[31m"
+# define NC				"\e[0m"
+# define speedRotate	0.05
+# define speed			0.1
+# define screenWidth	1024
+# define screenHeight	1024
 
 typedef struct textures
 {
@@ -104,10 +106,16 @@ size_t	ft_strlen(const char *s);
 char	**ft_get_file(char *str);
 ////////////////////////////////////////////////////////
 //TEXTURES
-void	ft_get_textures(t_map map);
+void	ft_get_textures(t_map *map);
 ////////////////////////////////////////////////////////
 //COLOURS
 char	*ft_strim_final(char *s);
 void	ft_get_colours(t_map *map);
-
+////////////////////////////////////////////////////////
+//ERRORS
+void	ft_error(char *err);
+void	ft_free_matrix(char **matrix);
+////////////////////////////////////////////////////////
+//FREE
+void	ft_free_map(t_map *map);
 #endif

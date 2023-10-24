@@ -6,11 +6,7 @@ int	ft_open_fd(char *str)
 
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
-	{
-		printf("Error\n");
-		perror(str);
-		exit(1);
-	}
+		return (-1);
 	return (fd);
 }
 
@@ -44,6 +40,8 @@ int	ft_get_size_file(char *str)
 
 	max = 0;
 	fd = ft_open_fd(str);
+	if (fd == -1)
+		ft_error("Fichero no existe");
 	max = ft_size_file(fd);
 	close(fd);
 	return (max);
@@ -78,9 +76,14 @@ char	**ft_read_file(char *str, int max)
 	int		fd;
 
 	fd = ft_open_fd(str);
+	if (fd == -1)
+		ft_error("Fichero no existe");
 	file = (char **) malloc(sizeof(char *) * max);
 	if (!file)
-		return (close(fd), NULL);
+	{
+		close(fd);
+		ft_error("FILE malloc problem");
+	}
 	ft_introduce_line(file, max, fd);
 	close(fd);
 	return (file);
@@ -93,10 +96,7 @@ char	**ft_get_file(char *str)
 
 	max = ft_get_size_file(str);
 	if (max == 0)
-	{
-		printf("Error\nFichero Vacio\n");
-		exit (1);
-	}
+		ft_error("Fichero Vacio");
 	file = ft_read_file(str, max);
 	return (file);
 }
