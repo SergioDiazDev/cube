@@ -56,6 +56,7 @@ typedef struct s_player
 	double		plan_y;
 	double		cam;
 	double		ray_d_x;
+	double		tex_x;
 	double		ray_d_y;
 	int			map_x;
 	int			map_y;

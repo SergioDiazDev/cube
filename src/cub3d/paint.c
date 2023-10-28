@@ -41,7 +41,7 @@ void	ft_paint_wall(int x, t_player *p)
 	tex_pos = (p->draw_start - SCREEN_H / 2 + p->line_height / 2) * step;
 	while (y < p->draw_end)
 	{
-		u = ft_get_uin32(p->mapa.textures.north->pixels, p->mapa.textures.north->width * tex_pos * 4 + x * 4);
+		u = ft_get_uin32(p->mapa.textures.north->pixels, p->mapa.textures.north->width * (int) tex_pos * 4 + (int) p->tex_x * 4);
 		mlx_put_pixel(p->walls, x, y, u);
 		tex_pos += step;
 		y++;
@@ -50,6 +50,7 @@ void	ft_paint_wall(int x, t_player *p)
 
 void	ft_paint(t_player *p)
 {
+	double wallx;
 	//Elimino los muros antiguos
 	if (p->walls)
 	{
@@ -70,17 +71,14 @@ void	ft_paint(t_player *p)
 		ft_steps(p);
 		ft_perform_dda(p);
 		ft_distance_wall(p);
-		//Color aqui hay que usar texturas 
-		//p->color = p->side ? 0x00000FF : 0xec8b00ff;
-		if (p->side)
-		{
-			p->color = 0x00000FF;
-		}
+		if (p->side == 0 || p->side == 2)
+			wallx = p->p_y + p->perp_wall_dist * p->ray_d_y;
 		else
-		{
-			p->color = 0xec8b00ff;
-		}
-		//printf("X:%f Y:%f = %c\n",p->posX, p->posY, p->map[p->mapX][p->mapY]);
+			wallx = p->p_x + p->perp_wall_dist * p->ray_d_x;
+		wallx = wallx - (int)wallx;
+		p->tex_x = (int)(wallx * (double)p->mapa.textures.north->width);
+		if ((p->side == 2 || p->side == 1))
+			p->tex_x = p->mapa.textures.north->width - p->tex_x - 1;
 		ft_paint_wall(x, p);
 		x++;
 	}
