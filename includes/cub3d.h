@@ -11,12 +11,12 @@
 # include "../library/MLX42/include/MLX42/MLX42.h"
 # include "../library/libft/libft.h"
 
-# define RED			"\e[31m"
-# define NC				"\e[0m"
-# define speedRotate	0.05
-# define speed			0.1
-# define screenWidth	1024
-# define screenHeight	1024
+# define RED		"\e[31m"
+# define NC			"\e[0m"
+# define SPEED_R	0.05
+# define SPEED		0.1
+# define SCREEN_W	1024
+# define SCREEN_H	1024
 
 typedef struct textures
 {
@@ -48,29 +48,29 @@ typedef struct s_map
 typedef struct s_player
 {
 	char		**map;
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
-	double		cameraX;
-	double		rayDirX;
-	double		rayDirY;
-	int			mapX;
-	int			mapY;
-	double		sideDistX;
-	double		sideDistY;
-	double		deltaDistX;
-	double		deltaDistY;
-	int			stepX;
-	int			stepY;
-	double		perpWallDist;
+	double		p_x;
+	double		p_y;
+	double		d_x;
+	double		d_y;
+	double		plan_x;
+	double		plan_y;
+	double		cam;
+	double		ray_d_x;
+	double		ray_d_y;
+	int			map_x;
+	int			map_y;
+	double		side_d_x;
+	double		side_d_y;
+	double		delta_d_x;
+	double		delta_d_y;
+	int			step_x;
+	int			step_y;
+	double		perp_wall_dist;
 	int			hit;
 	int			side;
-	int			lineHeight;
-	int			drawStart;
-	int			drawEnd;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 	uint32_t	color;
 	mlx_t		*mlx;
 	mlx_image_t	*walls;

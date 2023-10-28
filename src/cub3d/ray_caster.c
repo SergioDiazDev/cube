@@ -4,19 +4,19 @@ void	ft_perform_dda(t_player *p)
 {
 	while(p->hit == 0)
 		{
-			if (p->sideDistX < p->sideDistY)
+			if (p->side_d_x < p->side_d_y)
 			{
-				p->sideDistX += p->deltaDistX;
-				p->mapX += p->stepX;
+				p->side_d_x += p->delta_d_x;
+				p->map_x += p->step_x;
 				p->side = 0;
 			}
 			else
 			{
-				p->sideDistY += p->deltaDistY;
-				p->mapY += p->stepY;
+				p->side_d_y += p->delta_d_y;
+				p->map_y += p->step_y;
 				p->side = 1;
 			}
-			if (p->map[p->mapX][p->mapY] == '1')
+			if (p->map[p->map_x][p->map_y] == '1')
 				p->hit = 1;
 		}
 }
@@ -24,51 +24,51 @@ void	ft_perform_dda(t_player *p)
 void	ft_distance_wall(t_player *p)
 {
 	if (!p->side)
-			p->perpWallDist = p->sideDistX - p->deltaDistX;
+			p->perp_wall_dist = p->side_d_x - p->delta_d_x;
 		else
-			p->perpWallDist = p->sideDistY - p->deltaDistY;
+			p->perp_wall_dist = p->side_d_y - p->delta_d_y;
 		//Calulate height Walls
-		p->lineHeight = (int)(screenWidth / p->perpWallDist);
-		p->drawStart = -p->lineHeight / 2 + screenHeight / 2;
-		if (p->drawStart < 0)
-			p->drawStart = 0;
-		p->drawEnd = p->lineHeight / 2 + screenHeight / 2;
-		if (p->drawEnd >= screenHeight)
-			p->drawEnd = screenHeight - 1;
+		p->line_height = (int)(SCREEN_W / p->perp_wall_dist);
+		p->draw_start = -p->line_height / 2 + SCREEN_H / 2;
+		if (p->draw_start < 0)
+			p->draw_start = 0;
+		p->draw_end = p->line_height / 2 + SCREEN_H / 2;
+		if (p->draw_end >= SCREEN_H)
+			p->draw_end = SCREEN_H - 1;
 }
 
 void ft_deltas(t_player *p)
 {
-	if (!p->rayDirX)
-			p->deltaDistX = 1e30;
+	if (!p->ray_d_x)
+			p->delta_d_x = 1e30;
 	else
-		p->deltaDistX = fabs(1 / p->rayDirX);
-	if (!p->rayDirY)
-		p->deltaDistY = 1e30;
+		p->delta_d_x = fabs(1 / p->ray_d_x);
+	if (!p->ray_d_y)
+		p->delta_d_y = 1e30;
 	else
-		p->deltaDistY = fabs(1 /p->rayDirY);
+		p->delta_d_y = fabs(1 /p->ray_d_y);
 }
 
 void	ft_steps(t_player *p)
 {
-	if (p->rayDirX < 0)
+	if (p->ray_d_x < 0)
 		{
-			p->stepX = -1;
-			p->sideDistX = (p->posX - p->mapX) * p->deltaDistX;
+			p->step_x = -1;
+			p->side_d_x = (p->p_x - p->map_x) * p->delta_d_x;
 		}
 		else
 		{
-			p->stepX = 1;
-			p->sideDistX = (p->mapX + 1.0 - p->posX) * p->deltaDistX;
+			p->step_x = 1;
+			p->side_d_x = (p->map_x + 1.0 - p->p_x) * p->delta_d_x;
 		}
-		if (p->rayDirY < 0)
+		if (p->ray_d_y < 0)
 		{
-			p->stepY = -1;
-			p->sideDistY = (p->posY - p->mapY) * p->deltaDistY;
+			p->step_y = -1;
+			p->side_d_y = (p->p_y - p->map_y) * p->delta_d_y;
 		}
 		else
 		{
-			p->stepY = 1;
-			p->sideDistY = (p->mapY + 1.0 - p->posY) * p->deltaDistY;
+			p->step_y = 1;
+			p->side_d_y = (p->map_y + 1.0 - p->p_y) * p->delta_d_y;
 		}
 }

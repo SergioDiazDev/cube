@@ -20,7 +20,7 @@ int	ft_size_file(int fd)
 	if (!line)
 		return (0);
 	if (line[0] != '\n')
-			cont++;
+		cont++;
 	while (line)
 	{
 		free(line);

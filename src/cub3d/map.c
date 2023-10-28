@@ -12,7 +12,7 @@ void	ft_parse_map(t_map *map)
 	{
 		k = 0;
 		while (map->file[i][k])
-		{	
+		{
 			if (map->file[i][k] == ' ' || map->file[i][k] == '\n')
 				map->map_fill[j][k] = 'X';
 			else if (map->file[i][k] == '0' || map->file[i][k] == '1')
