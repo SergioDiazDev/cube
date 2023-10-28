@@ -1,9 +1,9 @@
-NO ./esto.png
-SO ./esto.png
-WE ./esto.png
-EA ./esto.png
-F 220,100,0
-C 34,50,0
+NO ./textures/wall.png
+SO ./textures/wall.png
+WE ./textures/wall.png
+EA ./textures/wall.png
+F 53,104,45
+C 0,170,228
          1111111111111111111111111
          1000000000110000000000001
          1011000001100000000000001

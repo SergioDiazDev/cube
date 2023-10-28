@@ -18,13 +18,31 @@ void	ft_paint_bg(t_player *p)
 	}
 }
 
+uint32_t	ft_get_uin32(uint8_t *conv, int n)
+{
+	uint32_t	u;
+
+	u = conv[n] << 24;
+	u += conv[n + 1] << 16;
+	u += conv[n + 2] << 8;
+	u += conv[n + 3];
+	return (u);
+}
+
 void	ft_paint_wall(int x, t_player *p)
 {
-	int y;
+	int			y;
+	double		step;
+	double		tex_pos;
+	uint32_t	u;
+
 	y = p->drawStart;
+	step = (double) p->mapa.textures.north->height / p->lineHeight;
+	tex_pos = (p->drawStart - screenHeight / 2 + p->lineHeight / 2) * step;
 	while (y < p->drawEnd)
 	{
-		mlx_put_pixel(p->walls, x, y ,p->color);
+		u = ft_get_uin32(p->mapa.textures.north->pixels, p->mapa.textures.north->width * y * 4 + x * 4);
+		mlx_put_pixel(p->walls, x, y, u); 
 		y++;
 	}
 }
@@ -46,7 +64,6 @@ void	ft_paint(t_player *p)
 		p->rayDirY = p->dirY + p->planeY * p->cameraX;
 		p->mapX = (int)p->posX;
 		p->mapY = (int)p->posY;
-
 		ft_deltas(p);
 		p->hit = 0;
 		ft_steps(p);
