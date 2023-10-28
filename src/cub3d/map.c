@@ -12,12 +12,13 @@ void	ft_parse_map(t_map *map)
 	{
 		k = 0;
 		while (map->file[i][k])
-		{	
-			if (map->file[i][k] == ' ' ||  map->file[i][k] == '\n')
+		{
+			if (map->file[i][k] == ' ' || map->file[i][k] == '\n')
 				map->map_fill[j][k] = 'X';
-			else if(map->file[i][k] == '0' || map->file[i][k] == '1')
+			else if (map->file[i][k] == '0' || map->file[i][k] == '1')
 				map->map_fill[j][k] = map->file[i][k];
-			else if(map->file[i][k] == 'N' || map->file[i][k] == 'S' || map->file[i][k] == 'W' || map->file[i][k] == 'E')
+			else if (map->file[i][k] == 'N' || map->file[i][k] == 'S' ||\
+			map->file[i][k] == 'W' || map->file[i][k] == 'E')
 			{
 				map->dir = map->file[i][k];
 				map->pos_h = j;
@@ -26,10 +27,8 @@ void	ft_parse_map(t_map *map)
 			}
 			else
 			{
-				printf("ERROR = %c\n", map->file[i][k]);
-				printf("ERROR = %d\n", map->file[i][k]);
-				perror("ERROR CON EL MAPA TENGO QUE LIBERAR COSITAS HACER MAS ADELANTE");
-				exit (1);
+				ft_free_map(map);
+				ft_error("Carácteres erróneos en el mapa");
 			}
 			k++;
 		}
@@ -64,8 +63,8 @@ void	ft_create_map(t_map *map)
 	map->map_fill = (char **) ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->map_fill)
 	{
-		perror("ERROR AL CREAR MALLOC DE RELLENO DE MAPA");
-		exit(1);
+		ft_free_map(map);
+		ft_error("Malloc allocation problem");
 	}
 	i = 0;
 	while (i < map->height)
@@ -80,8 +79,8 @@ void	ft_create_map(t_map *map)
 		}
 		if (!map->map_fill[i])
 		{
-			perror("ERROR AL CREAR MALLOC DE RELLENO DE MAPA");
-			exit(1);
+			ft_free_map(map);
+			ft_error("Malloc allocation problem");
 		}
 		i++;
 	}
@@ -103,16 +102,16 @@ void	ft_control_map(t_map *map)
 				if (i == 0 || j == 0 || \
 				i == map->height - 1 || j == map->width - 1)
 				{
-					perror("EL MAPA DEBE ESTAR RODEADO Y DEBO LIBERAR TODO");
-					exit (1);
+					ft_free_map(map);
+					ft_error("El mapa no esta rodeado de muros");
 				}
 				if (map->map_fill[i + 1][j] == 'X' || \
 				map->map_fill[i - 1][j] == 'X' || \
 				map->map_fill[i][j + 1] == 'X' || \
 				map->map_fill[i][j - 1] == 'X')
 				{
-					perror("EL MAPA DEBE ESTAR RODEADO Y DEBO LIBERAR TODO");
-					exit (1);
+					ft_free_map(map);
+					ft_error("El mapa no esta rodeado de muros");
 				}
 			}
 			j++;
@@ -121,26 +120,25 @@ void	ft_control_map(t_map *map)
 	}
 }
 
+void	ft_initialize_map(t_map *map)
+{
+	map->textures.east = NULL;
+	map->textures.west = NULL;
+	map->textures.north = NULL;
+	map->textures.south = NULL;
+}
+
 t_map	ft_get_map(char *str)
 {
 	t_map	map;
-	int		i;
 
+	ft_initialize_map(&map);
 	map.file = ft_get_file(str);
-	ft_get_textures(map);
-	ft_get_colours(map);
 	ft_get_length_map(&map);
 	ft_create_map(&map);
 	ft_parse_map(&map);
 	ft_control_map(&map);
-	i = 0;
-	while (map.map_fill[i])
-	{
-		printf("%s\n", map.map_fill[i]);
-		i++;
-	}
-	printf("POSITION WIDTH %d\n", map.pos_w);
-	printf("POSITION HEIGHT %d\n", map.pos_h);
-	printf("DIRECTION %c\n", map.dir);
+	ft_get_textures(&map);
+	ft_get_colours(&map);
 	return (map);
 }

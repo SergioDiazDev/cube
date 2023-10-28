@@ -6,7 +6,7 @@ char	*ft_strim_final(char *s)
 	int		i;
 
 	i = 0;
-	while (s[i] && s[i] != ' ')
+	while (s[i] && s[i] != ' ' && s[i] != '\n')
 		i++;
 	dst = malloc(sizeof(char *) * i + 1);
 	dst[i--] = '\0';
@@ -42,19 +42,7 @@ int	ft_count_split(char **split)
 	return (i);
 }
 
-void	ft_free_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-}
-
-uint32_t	ft_get_colours_by_id(char *id, char *str)
+uint32_t	ft_get_colours_by_id(char *id, char *str, t_map *map)
 {
 	uint32_t		colour;
 	char			**split;
@@ -65,20 +53,20 @@ uint32_t	ft_get_colours_by_id(char *id, char *str)
 	free(s_colour);
 	if (ft_count_split(split) != 3)
 	{
-		perror("Error al introducir RGB");
-		free(split);
-		exit (1);
+		ft_free_matrix(split);
+		ft_free_map(map);
+		ft_error("Error al introducir RGB");
 	}
-	colour = 0;
-	colour = ft_atoi(split[0]) << 16;
-	colour += ft_atoi(split[1]) << 8;
-	colour += ft_atoi(split[2]);
-	ft_free_split(split);
+	colour = 255;
+	colour += ft_atoi(split[0]) << 24;
+	colour += ft_atoi(split[1]) << 16;
+	colour += ft_atoi(split[2]) << 8;
+	ft_free_matrix(split);
 	return (colour);
 }
 
-void	ft_get_colours(t_map map)
+void	ft_get_colours(t_map *map)
 {
-	map.colours.floor = ft_get_colours_by_id("F", map.file[4]);
-	map.colours.ceiling = ft_get_colours_by_id("C", map.file[5]);
+	map->colours.floor = ft_get_colours_by_id("F", map->file[4], map);
+	map->colours.ceiling = ft_get_colours_by_id("C", map->file[5], map);
 }

@@ -1,5 +1,65 @@
-
 #include "cub3d.h"
+
+static void	ft_move_w_s(t_player *p)
+{
+	if (mlx_is_key_down(p->mlx, MLX_KEY_W))
+	{
+		if (p->map[(int)(p->p_x)][(int)(p->p_y + p->d_y * SPEED)] != '1')
+			p->p_y += p->d_y * SPEED;
+		if (p->map[(int)(p->p_x + p->d_x * SPEED)][(int)(p->p_y)] != '1')
+			p->p_x += p->d_x * SPEED;
+	}
+	if (mlx_is_key_down(p->mlx, MLX_KEY_S))
+	{
+		if (p->map[(int)(p->p_x)][(int)(p->p_y - p->d_y * SPEED)] != '1')
+			p->p_y -= p->d_y * SPEED;
+		if (p->map[(int)(p->p_x - p->d_x * SPEED)][(int)(p->p_y)] != '1')
+			p->p_x -= p->d_x * SPEED;
+	}
+}
+
+static void	ft_move_a_d(t_player *p)
+{
+	if (mlx_is_key_down(p->mlx, MLX_KEY_A))
+	{
+		if (p->map[(int)(p->p_x)][(int)(p->p_y - p->plan_y * SPEED)] != '1')
+			p->p_y -= p->plan_y * SPEED;
+		if (p->map[(int)(p->p_x - p->plan_x * SPEED)][(int)(p->p_y)] != '1')
+			p->p_x -= p->plan_x * SPEED;
+	}
+	if (mlx_is_key_down(p->mlx, MLX_KEY_D))
+	{
+		if (p->map[(int)(p->p_x)][(int)(p->p_y + p->plan_y * SPEED)] != '1')
+			p->p_y += p->plan_y * SPEED;
+		if (p->map[(int)(p->p_x + p->plan_x * SPEED)][(int)(p->p_y)] != '1')
+			p->p_x += p->plan_x * SPEED;
+	}
+}
+
+static void	ft_rotate(t_player *p)
+{
+	double	old_dirx;
+	double	oplanx;
+
+	old_dirx = p->d_x;
+	oplanx = p->plan_x;
+	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT))
+	{
+		p->d_x = p->d_x * cos(SPEED_R) - p->d_y * sin(SPEED_R);
+		p->d_y = old_dirx * sin(SPEED_R) + p->d_y * cos(SPEED_R);
+		p->plan_x = p->plan_x * cos(SPEED_R) - p->plan_y * sin(SPEED_R);
+		p->plan_y = oplanx * sin(SPEED_R) + p->plan_y * cos(SPEED_R);
+	}
+	old_dirx = p->d_x;
+	oplanx = p->plan_x;
+	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT))
+	{
+		p->d_x = p->d_x * cos(-SPEED_R) - p->d_y * sin(-SPEED_R);
+		p->d_y = old_dirx * sin(-SPEED_R) + p->d_y * cos(-SPEED_R);
+		p->plan_x = p->plan_x * cos(-SPEED_R) - p->plan_y * sin(-SPEED_R);
+		p->plan_y = oplanx * sin(-SPEED_R) + p->plan_y * cos(-SPEED_R);
+	}
+}
 
 void	ft_hook(void *param)
 {
@@ -8,55 +68,8 @@ void	ft_hook(void *param)
 	p = (t_player *) param;
 	if (mlx_is_key_down(p->mlx, MLX_KEY_ESCAPE))
 		exit(-33);
-	//Separar
-	if (mlx_is_key_down(p->mlx, MLX_KEY_W))
-	{
-		if (p->map[(int)(p->posX)][(int)(p->posY + p->dirY * speed)] != '1')
-			p->posY += p->dirY * speed;
-		if (p->map[(int)(p->posX + p->dirX * speed)][(int)(p->posY)] != '1')
-			p->posX += p->dirX * speed;
-	}
-	if (mlx_is_key_down(p->mlx, MLX_KEY_S))
-	{
-		if (p->map[(int)(p->posX)][(int)(p->posY - p->dirY * speed)] != '1')
-			p->posY -= p->dirY * speed;
-		if (p->map[(int)(p->posX - p->dirX * speed)][(int)(p->posY)] != '1')
-			p->posX -= p->dirX * speed;
-	}
-	//Separar
-	if (mlx_is_key_down(p->mlx, MLX_KEY_A))
-	{
-		if (p->map[(int)(p->posX)][(int)(p->posY - p->planeY * speed)] != '1')
-			p->posY -= p->planeY * speed;
-		if (p->map[(int)(p->posX - p->planeX * speed)][(int)(p->posY)] != '1')
-			p->posX -= p->planeX * speed;
-	}
-	if (mlx_is_key_down(p->mlx, MLX_KEY_D))
-	{
-		if (p->map[(int)(p->posX)][(int)(p->posY + p->planeY * speed)] != '1')
-			p->posY += p->planeY * speed;
-		if (p->map[(int)(p->posX + p->planeX * speed)][(int)(p->posY)] != '1')
-			p->posX += p->planeX * speed;
-	}
-	//printf("X:%f\tY:%f\t= %c\n", p->posX, p->posY, p->map[(int)p->posX][(int)p->posY]);
-	//Separar
-	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT))
-	{
-		double oldDirX = p->dirX;
-		p->dirX = p->dirX * cos(speedRotate) - p->dirY * sin(speedRotate);
-		p->dirY = oldDirX * sin(speedRotate) + p->dirY * cos(speedRotate);
-		double oldPlaneX = p->planeX;
-		p->planeX = p->planeX * cos(speedRotate) - p->planeY * sin(speedRotate);
-		p->planeY = oldPlaneX * sin(speedRotate) + p->planeY * cos(speedRotate);
-	}
-	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT))
-	{
-		double oldDir = p->dirX;
-		p->dirX = p->dirX * cos(-speedRotate) - p->dirY * sin(-speedRotate);
-		p->dirY = oldDir * sin(-speedRotate) + p->dirY * cos(-speedRotate);
-		double oldPlaneX = p->planeX;
-		p->planeX = p->planeX * cos(-speedRotate) - p->planeY * sin(-speedRotate);
-		p->planeY = oldPlaneX * sin(-speedRotate) + p->planeY * cos(-speedRotate);
-	}
+	ft_move_w_s(p);
+	ft_move_a_d(p);
+	ft_rotate(p);
 	ft_paint(p);
 }

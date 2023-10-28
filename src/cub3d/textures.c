@@ -27,10 +27,30 @@ mlx_texture_t	*ft_get_texture_by_id(char *id, char *str)
 	return (texture);
 }
 
-void	ft_get_textures(t_map map)
+void	ft_get_textures(t_map *map)
 {
-	map.textures.north = ft_get_texture_by_id("NO", map.file[0]);
-	map.textures.south = ft_get_texture_by_id("SO", map.file[1]);
-	map.textures.west = ft_get_texture_by_id("WE", map.file[2]);
-	map.textures.east = ft_get_texture_by_id("EA", map.file[3]);
+	map->textures.north = ft_get_texture_by_id("NO", map->file[0]);
+	if (!map->textures.north)
+	{
+		ft_free_map(map);
+		ft_error("Fallo al abrir textura");
+	}
+	map->textures.south = ft_get_texture_by_id("SO", map->file[1]);
+	if (!map->textures.south)
+	{
+		ft_free_map(map);
+		ft_error("Fallo al abrir textura");
+	}
+	map->textures.west = ft_get_texture_by_id("WE", map->file[2]);
+	if (!map->textures.west)
+	{
+		ft_free_map(map);
+		ft_error("Fallo al abrir textura");
+	}
+	map->textures.east = ft_get_texture_by_id("EA", map->file[3]);
+	if (!map->textures.east)
+	{
+		ft_free_map(map);
+		ft_error("Fallo al abrir textura");
+	}
 }
