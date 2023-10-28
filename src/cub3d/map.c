@@ -122,10 +122,10 @@ void	ft_control_map(t_map *map)
 
 void	ft_initialize_map(t_map *map)
 {
-	map->textures.east = NULL;
-	map->textures.west = NULL;
-	map->textures.north = NULL;
-	map->textures.south = NULL;
+	map->tex.e = NULL;
+	map->tex.w = NULL;
+	map->tex.n = NULL;
+	map->tex.s = NULL;
 }
 
 t_map	ft_get_map(char *str)

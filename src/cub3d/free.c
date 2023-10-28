@@ -19,12 +19,12 @@ void	ft_free_map(t_map *map)
 		ft_free_matrix(map->file);
 	if (map->map_fill)
 		ft_free_matrix(map->map_fill);
-	if (map->textures.east)
-		mlx_delete_texture(map->textures.east);
-	if (map->textures.south)
-		mlx_delete_texture(map->textures.south);
-	if (map->textures.west)
-		mlx_delete_texture(map->textures.west);
-	if (map->textures.north)
-		mlx_delete_texture(map->textures.north);
+	if (map->tex.e)
+		mlx_delete_texture(map->tex.e);
+	if (map->tex.s)
+		mlx_delete_texture(map->tex.s);
+	if (map->tex.w)
+		mlx_delete_texture(map->tex.w);
+	if (map->tex.n)
+		mlx_delete_texture(map->tex.n);
 }

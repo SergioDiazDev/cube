@@ -3,11 +3,12 @@
 void	ft_paint_bg(t_player *p)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < SCREEN_W)
 	{
-		int j = -1;
+		j = -1;
 		while (++j < SCREEN_H)
 		{
 			if (j < SCREEN_H / 2)
@@ -37,11 +38,11 @@ void	ft_paint_wall(int x, t_player *p)
 	uint32_t	u;
 
 	y = p->draw_start;
-	step = (double) p->mapa.textures.north->height / p->line_height;
+	step = (double) p->mapa.tex.n->height / p->line_height;
 	tex_pos = (p->draw_start - SCREEN_H / 2 + p->line_height / 2) * step;
 	while (y < p->draw_end)
 	{
-		u = ft_get_uin32(p->mapa.textures.north->pixels, p->mapa.textures.north->width * (int) tex_pos * 4 + (int) p->tex_x * 4);
+		u = ft_get_uin32(p->mapa.tex.n->pixels, p->mapa.tex.n->width * (int) tex_pos * 4 + (int) p->tex_x * 4);
 		mlx_put_pixel(p->walls, x, y, u);
 		tex_pos += step;
 		y++;
@@ -76,9 +77,9 @@ void	ft_paint(t_player *p)
 		else
 			wallx = p->p_x + p->perp_wall_dist * p->ray_d_x;
 		wallx = wallx - (int)wallx;
-		p->tex_x = (int)(wallx * (double)p->mapa.textures.north->width);
+		p->tex_x = (int)(wallx * (double)p->mapa.tex.n->width);
 		if ((p->side == 2 || p->side == 1))
-			p->tex_x = p->mapa.textures.north->width - p->tex_x - 1;
+			p->tex_x = p->mapa.tex.n->width - p->tex_x - 1;
 		ft_paint_wall(x, p);
 		x++;
 	}

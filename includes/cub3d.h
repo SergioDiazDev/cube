@@ -20,10 +20,10 @@
 
 typedef struct textures
 {
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*west;
-	mlx_texture_t	*east;
+	mlx_texture_t	*n;
+	mlx_texture_t	*s;
+	mlx_texture_t	*w;
+	mlx_texture_t	*e;
 }t_textures;
 
 typedef struct colours
@@ -41,7 +41,7 @@ typedef struct s_map
 	char		dir;
 	char		**map_fill;
 	char		**file;
-	t_textures	textures;
+	t_textures	tex;
 	t_colours	colours;
 }	t_map;
 
