@@ -5,17 +5,6 @@ void	ft_leaks(void)
 	system("leaks -q cub3d");
 }
 
-// uint32_t	ft_get_uin32(uint8_t *conv, int n)
-// {
-// 	uint32_t	u;
-
-// 	u = conv[n];
-// 	u = (u << 8) + conv[n + 1];
-// 	u = (u << 8) + conv[n + 2];
-// 	u = (u << 8) + conv[n + 3];
-// 	return (u);
-// }
-
 int main(int ac, char **av)
 {
 	t_player	p;

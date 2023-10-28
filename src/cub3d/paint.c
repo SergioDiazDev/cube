@@ -41,8 +41,9 @@ void	ft_paint_wall(int x, t_player *p)
 	tex_pos = (p->draw_start - SCREEN_H / 2 + p->line_height / 2) * step;
 	while (y < p->draw_end)
 	{
-		u = ft_get_uin32(p->mapa.textures.north->pixels, p->mapa.textures.north->width * y * 4 + x * 4);
-		mlx_put_pixel(p->walls, x, y, u); 
+		u = ft_get_uin32(p->mapa.textures.north->pixels, p->mapa.textures.north->width * tex_pos * 4 + x * 4);
+		mlx_put_pixel(p->walls, x, y, u);
+		tex_pos += step;
 		y++;
 	}
 }
