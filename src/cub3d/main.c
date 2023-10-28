@@ -16,10 +16,34 @@ int main(int ac, char **av)
 	p.p_x = p.mapa.pos_h + 0.5;
 	p.p_y = p.mapa.pos_w + 0.5;
 	//Direciones respecto hacia donde se mira problemas aqui.
-	p.d_x = 0;
-	p.d_y = -1;
-	p.plan_x = 0.66;
-	p.plan_y = 0;
+	if (p.mapa.dir == 'W')
+	{
+		p.d_x = 0;
+		p.d_y = -1;
+		p.plan_x = 0.66;
+		p.plan_y = 0;
+	}
+	else if(p.mapa.dir == 'E')
+	{
+		p.d_x = 0;
+		p.d_y = 1;
+		p.plan_x = -0.66;
+		p.plan_y = 0;
+	}
+	else if(p.mapa.dir == 'N')
+	{
+		p.d_x = -1;
+		p.d_y = 0;
+		p.plan_x = 0;
+		p.plan_y = -0.66;
+	}
+	else if(p.mapa.dir == 'S')
+	{
+		p.d_x = 1;
+		p.d_y = 0;
+		p.plan_x = 0;
+		p.plan_y = 0.66;
+	}
 	//Para la funcion init
 	p.mlx = mlx_init(SCREEN_W, SCREEN_H, "CUB3D", false);
 	p.bg = mlx_new_image(p.mlx, SCREEN_W, SCREEN_H);
