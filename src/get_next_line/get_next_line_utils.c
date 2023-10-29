@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:33:13 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/01/31 19:55:32 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:45:50 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlen(const char *s)
 }
 
 char	*ft_strchr(const char *s, int c)
-{	
+{
 	if (s == NULL)
 		return (NULL);
 	while (*s)

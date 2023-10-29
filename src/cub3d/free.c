@@ -17,8 +17,8 @@ void	ft_free_map(t_map *map)
 {
 	if (map->file)
 		ft_free_matrix(map->file);
-	if (map->map_fill)
-		ft_free_matrix(map->map_fill);
+	if (map->map_f)
+		ft_free_matrix(map->map_f);
 	if (map->tex.e)
 		mlx_delete_texture(map->tex.e);
 	if (map->tex.s)

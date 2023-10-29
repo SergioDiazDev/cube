@@ -14,16 +14,16 @@ void	ft_parse_map(t_map *map)
 		while (map->file[i][k])
 		{
 			if (map->file[i][k] == ' ' || map->file[i][k] == '\n')
-				map->map_fill[j][k] = 'X';
+				map->map_f[j][k] = 'X';
 			else if (map->file[i][k] == '0' || map->file[i][k] == '1')
-				map->map_fill[j][k] = map->file[i][k];
-			else if (map->file[i][k] == 'N' || map->file[i][k] == 'S' ||\
+				map->map_f[j][k] = map->file[i][k];
+			else if (map->file[i][k] == 'N' || map->file[i][k] == 'S' || \
 			map->file[i][k] == 'W' || map->file[i][k] == 'E')
 			{
 				map->dir = map->file[i][k];
 				map->pos_h = j;
 				map->pos_w = k;
-				map->map_fill[j][k] = '0';
+				map->map_f[j][k] = '0';
 			}
 			else
 			{
@@ -51,8 +51,8 @@ void	ft_get_length_map(t_map *map)
 			width = ft_strlen(map->file[i]);
 		i++;
 	}
-	map->height = i - 6;
-	map->width = width;
+	map->h = i - 6;
+	map->w = width;
 }
 
 void	ft_create_map(t_map *map)
@@ -60,63 +60,54 @@ void	ft_create_map(t_map *map)
 	int	i;
 	int	j;
 
-	map->map_fill = (char **) ft_calloc(map->height + 1, sizeof(char *));
-	if (!map->map_fill)
+	map->map_f = (char **) ft_calloc(map->h + 1, sizeof(char *));
+	if (!map->map_f)
 	{
 		ft_free_map(map);
 		ft_error("Malloc allocation problem");
 	}
-	i = 0;
-	while (i < map->height)
+	i = -1;
+	while (++i < map->h)
 	{
-		map->map_fill[i] = malloc(map->width + 1 * sizeof(char));
-		map->map_fill[i][map->width] = '\0';
-		j = 0;
-		while (j < map->width)
-		{
-			map->map_fill[i][j] = 'X';
-			j++;
-		}
-		if (!map->map_fill[i])
+		map->map_f[i] = malloc(map->w + 1 * sizeof(char));
+		map->map_f[i][map->w] = '\0';
+		j = -1;
+		while (++j < map->w)
+			map->map_f[i][j] = 'X';
+		if (!map->map_f[i])
 		{
 			ft_free_map(map);
 			ft_error("Malloc allocation problem");
 		}
-		i++;
 	}
 }
 
-void	ft_control_map(t_map *map)
+void	ft_control_map(t_map *m)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (map->map_fill[i])
+	i = -1;
+	while (m->map_f[++i])
 	{
-		j = 0;
-		while (map->map_fill[i][j])
+		j = -1;
+		while (m->map_f[i][++j])
 		{
-			if (map->map_fill[i][j] == '0')
+			if (m->map_f[i][j] == '0')
 			{
-				if (i == 0 || j == 0 || \
-				i == map->height - 1 || j == map->width - 1)
+				if (i == 0 || j == 0 || i == m->h - 1 || j == m->w - 1)
 				{
-					ft_free_map(map);
+					ft_free_map(m);
 					ft_error("El mapa no esta rodeado de muros");
 				}
-				if (map->map_fill[i + 1][j] == 'X' || \
-				map->map_fill[i - 1][j] == 'X' || \
-				map->map_fill[i][j + 1] == 'X' || \
-				map->map_fill[i][j - 1] == 'X')
+				if (m->map_f[i + 1][j] == 'X' || m->map_f[i - 1][j] == 'X'
+					|| m->map_f[i][j + 1] == 'X' || m->map_f[i][j - 1] == 'X')
 				{
-					ft_free_map(map);
+					ft_free_map(m);
 					ft_error("El mapa no esta rodeado de muros");
 				}
 			}
-			j++;
 		}
-		i++;
 	}
 }
 

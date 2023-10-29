@@ -54,3 +54,29 @@ void	ft_get_textures(t_map *map)
 		ft_error("Fallo al abrir textura");
 	}
 }
+
+void	ft_get_tex_x(t_player *p)
+{
+	double	wallx;
+
+	if (p->side == 0 || p->side == 2)
+		wallx = p->p_y + p->perp_wall_dist * p->ray_d_y;
+	else
+		wallx = p->p_x + p->perp_wall_dist * p->ray_d_x;
+	wallx = wallx - (int)wallx;
+	p->tex_x = (int)(wallx * (double)p->mapa.tex.n->width);
+	if ((p->side == 2 || p->side == 1))
+		p->tex_x = p->mapa.tex.n->width - p->tex_x - 1;
+}
+
+mlx_texture_t	*ft_get_texture(t_player *p)
+{
+	if (p->side == 0)
+		return (p->mapa.tex.n);
+	else if (p->side == 1)
+		return (p->mapa.tex.e);
+	else if (p->side == 2)
+		return (p->mapa.tex.s);
+	else
+		return (p->mapa.tex.w);
+}

@@ -34,12 +34,12 @@ typedef struct colours
 
 typedef struct s_map
 {
-	int			width;
-	int			height;
+	int			w;
+	int			h;
 	int			pos_w;
 	int			pos_h;
 	char		dir;
-	char		**map_fill;
+	char		**map_f;
 	char		**file;
 	t_textures	tex;
 	t_colours	colours;
@@ -80,43 +80,46 @@ typedef struct s_player
 }	t_player;
 
 //init_cub3d
-
+void			ft_init_cub3d(t_player *p);
+void			ft_direction(t_player *p);
 ////////////////////////////////////////////////////////
 //hooks
-void	ft_hook(void *param);
+void			ft_hook(void *param);
 ////////////////////////////////////////////////////////
 //RayCaster
-void	ft_perform_dda(t_player *p);
-void	ft_distance_wall(t_player *p);
-void	ft_deltas(t_player *p);
-void	ft_steps(t_player *p);
+void			ft_perform_dda(t_player *p);
+void			ft_distance_wall(t_player *p);
+void			ft_deltas(t_player *p);
+void			ft_steps(t_player *p);
 ////////////////////////////////////////////////////////
 //Paint
-void	ft_paint_bg(t_player *p);
-void	ft_paint_wall(int x, t_player *p, mlx_texture_t *tex);
-void	ft_paint(t_player *p);
+void			ft_paint_bg(t_player *p);
+void			ft_paint_wall(int x, t_player *p, mlx_texture_t *tex);
+void			ft_paint(t_player *p);
 ////////////////////////////////////////////////////////
 //MAP PARSE
-t_map	ft_get_map(char *str);
+t_map			ft_get_map(char *str);
 ////////////////////////////////////////////////////////
 //GNL
-char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
+char			*get_next_line(int fd);
+size_t			ft_strlen(const char *s);
 ////////////////////////////////////////////////////////
 //FILE UTILS
-char	**ft_get_file(char *str);
+char			**ft_get_file(char *str);
 ////////////////////////////////////////////////////////
 //TEXTURES
-void	ft_get_textures(t_map *map);
+void			ft_get_tex_x(t_player *p);
+void			ft_get_textures(t_map *map);
+mlx_texture_t	*ft_get_texture(t_player *p);
 ////////////////////////////////////////////////////////
 //COLOURS
-char	*ft_strim_final(char *s);
-void	ft_get_colours(t_map *map);
+char			*ft_strim_final(char *s);
+void			ft_get_colours(t_map *map);
 ////////////////////////////////////////////////////////
 //ERRORS
-void	ft_error(char *err);
-void	ft_free_matrix(char **matrix);
+void			ft_error(char *err);
+void			ft_free_matrix(char **matrix);
 ////////////////////////////////////////////////////////
 //FREE
-void	ft_free_map(t_map *map);
+void			ft_free_map(t_map *map);
 #endif
