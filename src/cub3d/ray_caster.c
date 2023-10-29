@@ -52,7 +52,7 @@ void	ft_deltas(t_player *p)
 	if (!p->ray_d_y)
 		p->delta_d_y = 1e30;
 	else
-		p->delta_d_y = fabs(1 /p->ray_d_y);
+		p->delta_d_y = fabs(1 / p->ray_d_y);
 }
 
 void	ft_steps(t_player *p)
