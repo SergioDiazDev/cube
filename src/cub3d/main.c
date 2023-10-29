@@ -20,14 +20,14 @@ int main(int ac, char **av)
 	{
 		p.d_x = 0;
 		p.d_y = -1;
-		p.plan_x = 0.66;
+		p.plan_x = -0.66;
 		p.plan_y = 0;
 	}
 	else if(p.mapa.dir == 'E')
 	{
 		p.d_x = 0;
 		p.d_y = 1;
-		p.plan_x = -0.66;
+		p.plan_x = 0.66;
 		p.plan_y = 0;
 	}
 	else if(p.mapa.dir == 'N')
@@ -35,14 +35,14 @@ int main(int ac, char **av)
 		p.d_x = -1;
 		p.d_y = 0;
 		p.plan_x = 0;
-		p.plan_y = -0.66;
+		p.plan_y = 0.66;
 	}
 	else if(p.mapa.dir == 'S')
 	{
 		p.d_x = 1;
 		p.d_y = 0;
 		p.plan_x = 0;
-		p.plan_y = 0.66;
+		p.plan_y = -0.66;
 	}
 	//Para la funcion init
 	p.mlx = mlx_init(SCREEN_W, SCREEN_H, "CUB3D", false);
