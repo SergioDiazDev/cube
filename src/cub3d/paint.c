@@ -65,11 +65,15 @@ void	ft_get_tex_x(t_player *p)
 
 mlx_texture_t	*ft_get_texture(t_player *p)
 {
-	if (p->side == 0)
+	if (p->side == 0 && p->map_x < p->p_x)
+		return (p->mapa.tex.n);
+	if (p->side == 0 && p->map_x > p->p_x)
 		return (p->mapa.tex.s);
-	else
-		printf("adios\n");
-	return (p->mapa.tex.n);
+	if (p->side == 1 && p->map_y < p->p_y)
+		return (p->mapa.tex.w);
+	if (p->side == 1 && p->map_y > p->p_y)
+		return (p->mapa.tex.e);
+	return (p->mapa.tex.s);
 }
 
 void	ft_paint(t_player *p)
