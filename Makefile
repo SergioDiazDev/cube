@@ -23,8 +23,8 @@ GNLFD = get_next_line/
 
 # SOURCES
 CUB3D_SRC = main.c hooks.c ray_caster.c paint.c \
-			map.c file_utils.c \
-			textures.c colours.c error.c free.c
+			map.c file_utils.c init_cub3d.c\
+			textures.c colours.c error.c free.c 
 GNLFD_SRC = get_next_line.c get_next_line_utils.c
 
 #OBJECTS

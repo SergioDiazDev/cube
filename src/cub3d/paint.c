@@ -42,7 +42,8 @@ void	ft_paint_wall(int x, t_player *p, mlx_texture_t	*tex)
 	tex_pos = (p->draw_start - SCREEN_H / 2 + p->line_height / 2) * step;
 	while (y < p->draw_end)
 	{
-		u = ft_get_uin32(tex->pixels, tex->width * (int) tex_pos * 4 + (int) p->tex_x * 4);
+		u = ft_get_uin32(tex->pixels, tex->width * (int)
+				tex_pos * 4 + (int) p->tex_x * 4);
 		mlx_put_pixel(p->walls, x, y, u);
 		tex_pos += step;
 		y++;
@@ -86,8 +87,8 @@ void	ft_paint(t_player *p)
 		mlx_delete_image(p->mlx, p->walls);
 		p->walls = mlx_new_image(p->mlx, SCREEN_W, SCREEN_H);
 	}
-	x = 0;
-	while (x < SCREEN_W)
+	x = -1;
+	while (++x < SCREEN_W)
 	{
 		p->cam = 2 * x / (double)SCREEN_W -1;
 		p->ray_d_x = p->d_x + p->plan_x * p->cam;
@@ -98,11 +99,9 @@ void	ft_paint(t_player *p)
 		p->hit = 0;
 		ft_steps(p);
 		ft_perform_dda(p);
-		ft_distance_wall(p);
 		tex = ft_get_texture(p);
 		ft_get_tex_x(p);
 		ft_paint_wall(x, p, tex);
-		x++;
 	}
 	mlx_image_to_window(p->mlx, p->walls, 0, 0);
 }

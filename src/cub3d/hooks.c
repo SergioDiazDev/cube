@@ -43,7 +43,7 @@ static void	ft_rotate(t_player *p)
 
 	old_dirx = p->d_x;
 	oplanx = p->plan_x;
-	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT))
 	{
 		p->d_x = p->d_x * cos(SPEED_R) - p->d_y * sin(SPEED_R);
 		p->d_y = old_dirx * sin(SPEED_R) + p->d_y * cos(SPEED_R);
@@ -52,7 +52,7 @@ static void	ft_rotate(t_player *p)
 	}
 	old_dirx = p->d_x;
 	oplanx = p->plan_x;
-	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT))
 	{
 		p->d_x = p->d_x * cos(-SPEED_R) - p->d_y * sin(-SPEED_R);
 		p->d_y = old_dirx * sin(-SPEED_R) + p->d_y * cos(-SPEED_R);
