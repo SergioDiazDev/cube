@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 19:16:24 by pbengoec          #+#    #+#             */
+/*   Updated: 2023/11/09 19:16:25 by pbengoec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -99,6 +110,7 @@ void			ft_paint(t_player *p);
 ////////////////////////////////////////////////////////
 //MAP PARSE
 t_map			ft_get_map(char *str);
+void			ft_parse_map(t_map *map);
 ////////////////////////////////////////////////////////
 //GNL
 char			*get_next_line(int fd);
@@ -106,6 +118,7 @@ size_t			ft_strlen(const char *s);
 ////////////////////////////////////////////////////////
 //FILE UTILS
 char			**ft_get_file(char *str);
+int				ft_open_fd(char *str);
 ////////////////////////////////////////////////////////
 //TEXTURES
 void			ft_get_tex_x(t_player *p, mlx_texture_t *tex);

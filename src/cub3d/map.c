@@ -1,41 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 19:09:59 by pbengoec          #+#    #+#             */
+/*   Updated: 2023/11/09 19:10:01 by pbengoec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-
-void	ft_parse_map(t_map *map)
-{
-	int	j;
-	int	k;
-	int	i;
-
-	i = 6;
-	j = 0;
-	while (map->file[i])
-	{
-		k = 0;
-		while (map->file[i][k])
-		{
-			if (map->file[i][k] == ' ' || map->file[i][k] == '\n')
-				map->map_f[j][k] = 'X';
-			else if (map->file[i][k] == '0' || map->file[i][k] == '1')
-				map->map_f[j][k] = map->file[i][k];
-			else if (map->file[i][k] == 'N' || map->file[i][k] == 'S' || \
-			map->file[i][k] == 'W' || map->file[i][k] == 'E')
-			{
-				map->dir = map->file[i][k];
-				map->pos_h = j;
-				map->pos_w = k;
-				map->map_f[j][k] = '0';
-			}
-			else
-			{
-				ft_free_map(map);
-				ft_error("Carácteres erróneos en el mapa");
-			}
-			k++;
-		}
-		i++;
-		j++;
-	}
-}
 
 void	ft_get_length_map(t_map *map)
 {

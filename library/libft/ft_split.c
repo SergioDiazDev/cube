@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:38:36 by pbengoec          #+#    #+#             */
-/*   Updated: 2022/10/03 21:09:50 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:11:54 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	**ft_splitpriv(char const *s, char c, size_t	i, char **split)
 			start++;
 		else if ((s[i] == c && s[i - 1] != c)
 			|| (s[i] != c && s[i + 1] == '\0'))
-		{	
+		{
 			if (s[i] != c && s[i + 1] == '\0')
 				split[cont++] = ft_substr(s, start, i - start + 1);
 			else
