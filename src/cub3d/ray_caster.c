@@ -34,7 +34,7 @@ void	ft_distance_wall(t_player *p)
 		p->perp_wall_dist = p->side_d_x - p->delta_d_x;
 	else
 		p->perp_wall_dist = p->side_d_y - p->delta_d_y;
-	p->line_height = (int)(SCREEN_W / p->perp_wall_dist);
+	p->line_height = (int)(SCREEN_H / p->perp_wall_dist);
 	p->draw_start = -p->line_height / 2 + SCREEN_H / 2;
 	if (p->draw_start < 0)
 		p->draw_start = 0;

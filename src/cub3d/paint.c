@@ -38,7 +38,7 @@ void	ft_paint_wall(int x, t_player *p, mlx_texture_t	*tex)
 	uint32_t	u;
 
 	y = p->draw_start;
-	step = (double) tex->height / p->line_height;
+	step = 1.0 * tex->height / p->line_height;
 	tex_pos = (p->draw_start - SCREEN_H / 2 + p->line_height / 2) * step;
 	while (y < p->draw_end)
 	{
@@ -73,7 +73,7 @@ void	ft_paint(t_player *p)
 		ft_steps(p);
 		ft_perform_dda(p);
 		tex = ft_get_texture(p);
-		ft_get_tex_x(p);
+		ft_get_tex_x(p, tex);
 		ft_paint_wall(x, p, tex);
 	}
 	mlx_image_to_window(p->mlx, p->walls, 0, 0);

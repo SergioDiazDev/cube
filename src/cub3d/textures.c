@@ -55,7 +55,7 @@ void	ft_get_textures(t_map *map)
 	}
 }
 
-void	ft_get_tex_x(t_player *p)
+void	ft_get_tex_x(t_player *p, mlx_texture_t *tex)
 {
 	double	wallx;
 
@@ -64,9 +64,9 @@ void	ft_get_tex_x(t_player *p)
 	else
 		wallx = p->p_x + p->perp_wall_dist * p->ray_d_x;
 	wallx = wallx - (int)wallx;
-	p->tex_x = (int)(wallx * (double)p->mapa.tex.n->width);
+	p->tex_x = (int)(wallx * (double)tex->width);
 	if ((p->side == 2 || p->side == 1))
-		p->tex_x = p->mapa.tex.n->width - p->tex_x - 1;
+		p->tex_x = tex->width - p->tex_x - 1;
 }
 
 mlx_texture_t	*ft_get_texture(t_player *p)

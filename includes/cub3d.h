@@ -108,7 +108,7 @@ size_t			ft_strlen(const char *s);
 char			**ft_get_file(char *str);
 ////////////////////////////////////////////////////////
 //TEXTURES
-void			ft_get_tex_x(t_player *p);
+void			ft_get_tex_x(t_player *p, mlx_texture_t *tex);
 void			ft_get_textures(t_map *map);
 mlx_texture_t	*ft_get_texture(t_player *p);
 ////////////////////////////////////////////////////////
