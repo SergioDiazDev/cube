@@ -50,33 +50,6 @@ void	ft_paint_wall(int x, t_player *p, mlx_texture_t	*tex)
 	}
 }
 
-void	ft_get_tex_x(t_player *p)
-{
-	double	wallx;
-
-	if (p->side == 0 || p->side == 2)
-		wallx = p->p_y + p->perp_wall_dist * p->ray_d_y;
-	else
-		wallx = p->p_x + p->perp_wall_dist * p->ray_d_x;
-	wallx = wallx - (int)wallx;
-	p->tex_x = (int)(wallx * (double)p->mapa.tex.n->width);
-	if ((p->side == 2 || p->side == 1))
-		p->tex_x = p->mapa.tex.n->width - p->tex_x - 1;
-}
-
-mlx_texture_t	*ft_get_texture(t_player *p)
-{
-	if (p->side == 0 && p->map_x < p->p_x)
-		return (p->mapa.tex.n);
-	if (p->side == 0 && p->map_x > p->p_x)
-		return (p->mapa.tex.s);
-	if (p->side == 1 && p->map_y < p->p_y)
-		return (p->mapa.tex.w);
-	if (p->side == 1 && p->map_y > p->p_y)
-		return (p->mapa.tex.e);
-	return (p->mapa.tex.s);
-}
-
 void	ft_paint(t_player *p)
 {
 	int				x;

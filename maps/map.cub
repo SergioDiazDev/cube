@@ -1,7 +1,7 @@
-NO ./textures/trees.png
-SO ./textures/wall.png
-WE ./textures/window.png
-EA ./textures/color.png
+NO ./textures/ice.png
+SO ./textures/sand.png
+WE ./textures/wood.png
+EA ./textures/wall.png
 F 53,104,45
 C 0,170,228
          1111111111111111111111111

@@ -73,10 +73,11 @@ mlx_texture_t	*ft_get_texture(t_player *p)
 {
 	if (p->side == 0)
 		return (p->mapa.tex.n);
-	else if (p->side == 1)
-		return (p->mapa.tex.e);
-	else if (p->side == 2)
+	if (p->side == 2)
 		return (p->mapa.tex.s);
-	else
+	if (p->side == 3)
 		return (p->mapa.tex.w);
+	if (p->side == 1)
+		return (p->mapa.tex.e);
+	return (p->mapa.tex.e);
 }

@@ -67,7 +67,10 @@ void	ft_hook(void *param)
 
 	p = (t_player *) param;
 	if (mlx_is_key_down(p->mlx, MLX_KEY_ESCAPE))
-		exit(-33);
+	{
+		ft_free_map(&p->mapa);
+		exit(0);
+	}
 	ft_move_w_s(p);
 	ft_move_a_d(p);
 	ft_rotate(p);
