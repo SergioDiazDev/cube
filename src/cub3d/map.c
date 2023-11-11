@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:09:59 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/09 19:10:01 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:38:03 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	ft_control_map(t_map *m)
 				if (i == 0 || j == 0 || i == m->h - 1 || j == m->w - 1)
 				{
 					ft_free_map(m);
-					ft_error("El mapa no esta rodeado de muros");
+					ft_error("Map is not sorround by walls");
 				}
 				if (m->map_f[i + 1][j] == 'X' || m->map_f[i - 1][j] == 'X'
 					|| m->map_f[i][j + 1] == 'X' || m->map_f[i][j - 1] == 'X')
 				{
 					ft_free_map(m);
-					ft_error("El mapa no esta rodeado de muros");
+					ft_error("Map is not sorround by walls");
 				}
 			}
 		}

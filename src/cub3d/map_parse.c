@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:09:51 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/09 19:09:53 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:40:30 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,21 @@ void	ft_fill_map(t_map *map, int i, int j, int k)
 	else if (map->file[i][k] == 'N' || map->file[i][k] == 'S' || \
 	map->file[i][k] == 'W' || map->file[i][k] == 'E')
 	{
+		if (map->flag_pos)
+		{
+			ft_free_map(map);
+			ft_error("Can't be more than one position");
+		}
 		map->dir = map->file[i][k];
 		map->pos_h = j;
 		map->pos_w = k;
+		map->flag_pos = 1;
 		map->map_f[j][k] = '0';
 	}
 	else
 	{
 		ft_free_map(map);
-		ft_error("Carácteres erróneos en el mapa");
+		ft_error("Wrong character at map");
 	}
 }
 
@@ -61,5 +67,10 @@ void	ft_parse_map(t_map *map)
 		}
 		i++;
 		j++;
+	}
+	if (!map->flag_pos)
+	{
+		ft_error("There is not any initial position in the map");
+		ft_free_map(map);
 	}
 }

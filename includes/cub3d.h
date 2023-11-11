@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:16:24 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/09 19:16:25 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:33:53 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_map
 {
 	int			w;
 	int			h;
+	int			flag_pos;
 	int			pos_w;
 	int			pos_h;
 	char		dir;
