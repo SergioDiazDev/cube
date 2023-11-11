@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cub3d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:10:35 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/09 19:10:36 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:56:26 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ void	ft_direction(t_player *p)
 	p->plan_y = 0;
 	if (p->mapa.dir == 'W')
 	{
-		p->d_y = -1;
+		p->d_y = -1.1;
 		p->plan_x = -0.66;
 	}
 	else if (p->mapa.dir == 'E')
 	{
-		p->d_y = 1;
+		p->d_y = 1.1;
 		p->plan_x = 0.66;
 	}
 	else if (p->mapa.dir == 'N')
 	{
-		p->d_x = -1;
+		p->d_x = -1.1;
 		p->plan_y = 0.66;
 	}
 	else if (p->mapa.dir == 'S')
 	{
-		p->d_x = 1;
+		p->d_x = 1.1;
 		p->plan_y = -0.66;
 	}
 }
