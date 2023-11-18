@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:10:52 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/11 13:45:43 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:55:56 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ char	*ft_separate_by_id(char *id, char *str)
 	while (str[i] == ' ' && str[i])
 		i++;
 	if (str[i++] != id[0])
-		exit (1);
+		ft_error("File not in order");
 	if (str[i++] != id[1])
-		exit (1);
+		ft_error("File not in order");
 	while (str[i] == ' ' && str[i])
 		i++;
 	return (&str[i]);
@@ -45,25 +45,25 @@ void	ft_get_textures(t_map *map)
 	if (!map->tex.n)
 	{
 		ft_free_map(map);
-		ft_error("Fallo al abrir textura");
+		ft_error("Cannot open texture");
 	}
 	map->tex.s = ft_get_texture_by_id("SO", map->file[1]);
 	if (!map->tex.s)
 	{
 		ft_free_map(map);
-		ft_error("Fallo al abrir textura");
+		ft_error("Cannot open texture");
 	}
 	map->tex.w = ft_get_texture_by_id("WE", map->file[2]);
 	if (!map->tex.w)
 	{
 		ft_free_map(map);
-		ft_error("Fallo al abrir textura");
+		ft_error("Cannot open texture");
 	}
 	map->tex.e = ft_get_texture_by_id("EA", map->file[3]);
 	if (!map->tex.e)
 	{
 		ft_free_map(map);
-		ft_error("Fallo al abrir textura");
+		ft_error("Cannot open texture");
 	}
 }
 

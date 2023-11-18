@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:09:51 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/11 13:40:30 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:52:30 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_parse_map(t_map *map)
 	}
 	if (!map->flag_pos)
 	{
-		ft_error("There is not any initial position in the map");
 		ft_free_map(map);
+		ft_error("There is not any initial position in the map");
 	}
 }

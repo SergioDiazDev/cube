@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:09:59 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/11 13:38:03 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:44:26 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ t_map	ft_get_map(char *str)
 	map.file = ft_get_file(str);
 	ft_get_length_map(&map);
 	ft_create_map(&map);
-	ft_parse_map(&map);
-	ft_control_map(&map);
 	ft_get_textures(&map);
 	ft_get_colours(&map);
+	ft_parse_map(&map);
+	ft_control_map(&map);
 	return (map);
 }
