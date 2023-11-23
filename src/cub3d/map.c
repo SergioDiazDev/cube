@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:09:59 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/18 11:44:26 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:42:40 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,19 @@ void	ft_initialize_map(t_map *map)
 t_map	ft_get_map(char *str)
 {
 	t_map	map;
+	size_t	max;
+	char	**split;
 
+	split = ft_split(str, '.');
+	max = ft_strlen(str);
+	if (ft_strlen("cub") > ft_strlen(str))
+		max = ft_strlen(str);
+	if (split[1] && ft_strncmp("cub", split[1], max))
+	{
+		ft_free_matrix(split);
+		ft_error("Bad extension");
+	}
+	ft_free_matrix(split);
 	ft_initialize_map(&map);
 	map.file = ft_get_file(str);
 	ft_get_length_map(&map);
