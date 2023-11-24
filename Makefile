@@ -25,7 +25,7 @@ GNLFD = get_next_line/
 CUB3D_SRC = main.c hooks.c ray_caster.c paint.c \
 			map.c file_utils.c init_cub3d.c\
 			textures.c colours.c error.c free.c\
-			map_parse.c
+			map_parse.c identifier.c map_spaces_parse.c
 GNLFD_SRC = get_next_line.c get_next_line_utils.c
 
 #OBJECTS

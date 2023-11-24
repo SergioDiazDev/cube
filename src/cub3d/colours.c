@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:10:16 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/18 11:35:27 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:31:26 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,23 @@ int	ft_count_split(char **split)
 	return (i);
 }
 
-uint32_t	ft_get_colours_by_id(char *id, char *str, t_map *map)
+int	ft_str_is_digit(char *str)
+{
+	int	i;
+	int	digit;
+
+	digit = 1;
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (digit);
+}
+
+uint32_t	ft_get_colours_by_id(char *id, char *str)
 {
 	uint32_t		colour;
 	char			**split;
@@ -64,27 +80,21 @@ uint32_t	ft_get_colours_by_id(char *id, char *str, t_map *map)
 	split = ft_split(s_colour, ',');
 	free(s_colour);
 	if (ft_count_split(split) != 3)
-	{
-		ft_free_matrix(split);
-		ft_free_map(map);
-		ft_error("Wrong RGB");
-	}
+		ft_free_colours(split);
 	if (ft_strlen(split[0]) > 3 || ft_strlen(split[1]) > 3 || \
 	ft_strlen(split[2]) > 3)
-	{
-		ft_free_matrix(split);
-		ft_free_map(map);
-		ft_error("Wrong RGB");
-	}
+		ft_free_colours(split);
+	if (!ft_str_is_digit(split[0]) || \
+	!ft_str_is_digit(split[1]) || !ft_str_is_digit(split[2]))
+		ft_free_colours(split);
+	if (ft_atoi(split[0]) > 255 || \
+	ft_atoi(split[1]) > 255 || ft_atoi(split[2]) > 255)
+		ft_free_colours(split);
+	if (ft_atoi(split[0]) < 0 || ft_atoi(split[1]) < 0 || ft_atoi(split[2]) < 0)
+		ft_free_colours(split);
 	colour = 255;
 	colour += ft_atoi(split[0]) << 24;
 	colour += ft_atoi(split[1]) << 16;
 	colour += ft_atoi(split[2]) << 8;
 	return (ft_free_matrix(split), colour);
-}
-
-void	ft_get_colours(t_map *map)
-{
-	map->colours.floor = ft_get_colours_by_id("F", map->file[4], map);
-	map->colours.ceiling = ft_get_colours_by_id("C", map->file[5], map);
 }

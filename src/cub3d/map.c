@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:09:59 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/23 15:42:40 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:58:20 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_get_length_map(t_map *map)
 	int	i;
 	int	width;
 
-	i = 6;
+	i = map->start;
 	width = ft_strlen(map->file[i]);
 	i++;
 	while (map->file[i])
@@ -92,6 +92,8 @@ void	ft_initialize_map(t_map *map)
 	map->tex.w = NULL;
 	map->tex.n = NULL;
 	map->tex.s = NULL;
+	map->colours.ceiling = 0;
+	map->colours.floor = 0;
 }
 
 t_map	ft_get_map(char *str)
@@ -112,10 +114,9 @@ t_map	ft_get_map(char *str)
 	ft_free_matrix(split);
 	ft_initialize_map(&map);
 	map.file = ft_get_file(str);
+	ft_get_identifiers(&map);
 	ft_get_length_map(&map);
 	ft_create_map(&map);
-	ft_get_textures(&map);
-	ft_get_colours(&map);
 	ft_parse_map(&map);
 	ft_control_map(&map);
 	return (map);

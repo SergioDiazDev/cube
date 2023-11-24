@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:09:51 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/11 13:52:30 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:29:22 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_parse_map(t_map *map)
 	int	k;
 	int	i;
 
-	i = 6;
+	i = map->start;
 	j = 0;
 	while (map->file[i])
 	{

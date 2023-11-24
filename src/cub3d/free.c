@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:10:05 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/09 19:10:07 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:37:39 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ void	ft_free_map(t_map *map)
 		mlx_delete_texture(map->tex.w);
 	if (map->tex.n)
 		mlx_delete_texture(map->tex.n);
+}
+
+void	ft_free_colours(char **split)
+{
+	ft_free_matrix(split);
+	ft_error("Wrong RGB");
 }

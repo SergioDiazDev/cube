@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:10:23 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/09 19:10:25 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:48:41 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,11 @@ int	ft_size_file(int fd)
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	if (line[0] != '\n')
-		cont++;
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
-		if (!line)
-			cont ++;
-		else if (line[0] != '\n')
-			cont++;
+		cont++;
 	}
 	return (cont);
 }
@@ -56,20 +51,15 @@ void	ft_introduce_line(char **file, int max, int fd)
 
 	i = 0;
 	s = get_next_line(fd);
-	if (s[0] != '\n')
+	if (s)
 		file[i++] = s;
-	else
-		free(s);
 	while (i < max && s)
 	{
 		s = get_next_line(fd);
-		if (!s)
+		if (s)
 			file[i++] = s;
-		else if (s[0] != '\n')
-			file[i++] = s;
-		else
-			free(s);
 	}
+	file[i] = NULL;
 }
 
 char	**ft_read_file(char *str, int max)
@@ -80,7 +70,7 @@ char	**ft_read_file(char *str, int max)
 	fd = ft_open_fd(str);
 	if (fd == -1)
 		ft_error("Fichero no existe");
-	file = (char **) malloc(sizeof(char *) * max);
+	file = (char **) malloc(sizeof(char *) * max + 1);
 	if (!file)
 	{
 		close(fd);

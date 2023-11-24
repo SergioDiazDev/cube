@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:10:40 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/18 12:41:11 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:57:11 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	main(int ac, char **av)
 		mlx_loop_hook(p.mlx, ft_hook, &p);
 		mlx_loop(p.mlx);
 	}
-	ft_error("Bad arguments");
+	else
+		ft_error("Bad arguments");
+	ft_free_map(&p.mapa);
 	return (0);
 }

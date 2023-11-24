@@ -6,7 +6,7 @@
 /*   By: pbengoec <pbengoec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 19:16:24 by pbengoec          #+#    #+#             */
-/*   Updated: 2023/11/11 13:33:53 by pbengoec         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:08:44 by pbengoec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_map
 {
 	int			w;
 	int			h;
+	int			start;
 	int			flag_pos;
 	int			pos_w;
 	int			pos_h;
@@ -112,6 +113,8 @@ void			ft_paint(t_player *p);
 //MAP PARSE
 t_map			ft_get_map(char *str);
 void			ft_parse_map(t_map *map);
+int				ft_str_wrong_map(char *str);
+void			ft_check_map_spaces(t_map *map, int i);
 ////////////////////////////////////////////////////////
 //GNL
 char			*get_next_line(int fd);
@@ -123,17 +126,24 @@ int				ft_open_fd(char *str);
 ////////////////////////////////////////////////////////
 //TEXTURES
 void			ft_get_tex_x(t_player *p, mlx_texture_t *tex);
-void			ft_get_textures(t_map *map);
+mlx_texture_t	*ft_get_texture_by_id(char *id, char *str);
 mlx_texture_t	*ft_get_texture(t_player *p);
 ////////////////////////////////////////////////////////
 //COLOURS
+int				ft_count_split(char **split);
 char			*ft_strim_final(char *s);
-void			ft_get_colours(t_map *map);
+uint32_t		ft_get_colours_by_id(char *id, char *str);
 ////////////////////////////////////////////////////////
 //ERRORS
 void			ft_error(char *err);
+void			ft_error_line(char *err, char *str);
 void			ft_free_matrix(char **matrix);
 ////////////////////////////////////////////////////////
 //FREE
 void			ft_free_map(t_map *map);
+void			ft_free_colours(char **split);
+////////////////////////////////////////////////////////
+//IDENTIFIER
+void			ft_get_identifiers(t_map *map);
+int				ft_str_empty(char *str);
 #endif
