@@ -7,7 +7,7 @@ ifeq ($(shell uname), Darwin)
 	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 	
 else
-	CFLAGS			=	-Wall -Werror -ldl -Wextra -g3
+	CFLAGS			=	-Wall -Werror -Wextra -g3
 	INCLUDE			=	-DEBUG=1 -Iinclude -ldl -lglfw -L"usr/lib/x86_64-linux-gnu/"
 endif
 
