@@ -8,7 +8,7 @@ ifeq ($(shell uname), Darwin)
 	
 else
 	CFLAGS			=	-Wall -Werror -ldl -Wextra -g3
-	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"usr/lib/x86_64-linux-gnu/"
+	INCLUDE			=	-DEBUG=1 -Iinclude -ldl -lglfw -L"usr/lib/x86_64-linux-gnu/"
 endif
 
 #SHORT NAMES
